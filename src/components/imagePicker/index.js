@@ -12,7 +12,7 @@ const ImagePicker = ({type, success}) => {
         success(image);
       })
       .catch(e => {
-        console.log('catch error in image', e);
+        console.log('catch error in image component', e);
         return e;
       });
   } else {
