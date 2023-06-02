@@ -1,12 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import App from './navigation/index';
-import store from './redux/store';
+import Navigation from '@navigation';
+import store from '@redux/store';
 
 const Route = () => {
   return (
     <Provider store={store}>
-      <App />
+      <Navigation />
     </Provider>
   );
 };

@@ -1,69 +1,101 @@
 import React from 'react';
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {s, vs, ms} from '@utils/sizeMatter';
-import theme from '@utils/theme';
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Pressable,
+  Platform,
+} from 'react-native';
+import {ms} from 'react-native-size-matters/extend';
+import {theme} from '@utils';
+import {Box} from '@components';
 
-const Button = ({title, onPress, varient, extraStyle}) => {
+const Button = ({
+  title,
+  onPress,
+  variant,
+  disabled,
+  buttonStyle,
+  buttonTextStyle,
+  foreground,
+  borderless,
+}) => {
   let newStyle = {};
-  let textStyle = {};
-  switch (varient) {
-    case 'plain':
-      newStyle = {
-        alignSelf: 'flex-end',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: vs(8),
-        marginBottom: vs(20),
-      };
-      textStyle = {
-        color: '#858585',
-        textAlign: 'right',
-        paddingHorizontal: 0,
-        paddingVertical: 0,
-      };
-      break;
+  let newTextStyle = {};
+  switch (variant) {
     case 'primary':
       newStyle = {
-        backgroundColor: theme.colors.blue,
-        textAlign: 'center',
+        backgroundColor: theme.colors.primaryButton,
+        width: '100%',
+        ...buttonStyle,
       };
-      textStyle = {
+      newTextStyle = {
         color: theme.colors.white,
+        ...buttonTextStyle,
       };
       break;
-    case 'invisible':
+    case 'outline':
       newStyle = {
-        width: s(150),
-        alignSelf: 'flex-end',
+        backgroundColor: theme.colors.white,
+        borderWidth: 1,
+        borderColor: theme.colors.buttonBorder,
+        width: '100%',
+        ...buttonStyle,
+      };
+      newTextStyle = {
+        color: theme.colors.buttonBorder,
+        ...buttonTextStyle,
       };
       break;
     default:
       newStyle = {
-        color: theme.colors.blue,
-        width: s(400),
-        alignSelf: 'flex-end',
+        ...buttonStyle,
+      };
+      newTextStyle = {
+        color: theme.colors.bottomText,
+        paddingHorizontal: 0,
+        paddingVertical: 0,
+        ...buttonTextStyle,
       };
       break;
   }
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.buttonStyle, newStyle, extraStyle]}>
-      <Text style={[styles.title, textStyle]}>{title}</Text>
-    </TouchableOpacity>
-  );
+
+  let renderButton =
+    Platform.OS === 'android' ? (
+      <Box style={[styles.baseStyle, newStyle]}>
+        <Pressable
+          disabled={disabled}
+          android_ripple={{
+            color: theme.colors.ripple,
+            foreground: foreground ? true : false,
+            borderless: borderless ? true : false,
+          }}
+          onPress={onPress}
+          style={[styles.baseStyle, newStyle]}>
+          <Text style={[styles.title, newTextStyle]}>{title}</Text>
+        </Pressable>
+      </Box>
+    ) : (
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={disabled}
+        style={[styles.baseStyle, newStyle]}>
+        <Text style={[styles.title, newTextStyle]}>{title}</Text>
+      </TouchableOpacity>
+    );
+
+  return renderButton;
 };
 
 export {Button};
 
 const styles = StyleSheet.create({
-  buttonStyle: {
+  baseStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: ms(2),
+    borderRadius: ms(8),
   },
   title: {
-    paddingHorizontal: s(60),
-    paddingVertical: vs(10),
+    textAlign: 'center',
   },
 });

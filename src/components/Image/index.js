@@ -3,7 +3,6 @@ import {Image as ImageComponent, StyleSheet} from 'react-native';
 
 const Image = ({path, type, style, resizeMode, canGoBack}) => {
   let newPath = type === 'offline' ? path : {uri: path};
-  console.log('newPath', newPath);
   return (
     <ImageComponent
       source={newPath}
