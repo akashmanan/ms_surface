@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {StyleSheet, useWindowDimensions} from 'react-native';
 import {Box, Dropdown, Input, ScreenName, Checkbox} from '@components';
 import {s, vs, ms} from '@utils';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Feather from 'react-native-vector-icons/Feather';
+import { Image } from '../../../components';
 
 const CreateInspection = () => {
   const {width, height} = useWindowDimensions();
@@ -18,8 +21,8 @@ const CreateInspection = () => {
     setState(prev => ({...prev, image: image?.assets[0]}));
   };
 
-  const selectImage = () => {
-    ImagePicker({type: 'camera', success: getImage});
+  const selectImage = (type) => {
+    ImagePicker({type: type, success: getImage});
   };
 
   return (
@@ -41,6 +44,12 @@ const CreateInspection = () => {
         <Checkbox variant={'radio'} title={'Select Second'} />
         <Checkbox variant={'checkbox'} title={'Check this value!'} />
       </Box>
+        <Icon style={styles.itemIcon} name ='camera' onPress={selectImage('camera')} />
+        <Feather style={styles.itemIcon} name='image' onPress={selectImage('gallery')} />
+        {state.image ?
+        <Image
+        path={state.image.url}
+      /> : null}
     </Box>
   );
 };
