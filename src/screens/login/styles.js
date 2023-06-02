@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {vs, ms} from '@utils/sizeMatter';
-import theme from '@utils/theme';
+import {theme, s, vs, ms} from '@utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,55 +10,68 @@ const styles = StyleSheet.create({
   imgContainer: {
     height: '30%',
     width: '100%',
-    backgroundColor: 'blue',
   },
   bannerImage: {width: '104%', height: '110%'},
-  loginForm: {
+  loginForm: (w, h) => ({
     height: '70%',
     width: '65%',
     alignSelf: 'center',
     position: 'absolute',
-    top: vs(100),
-    borderRadius: ms(10),
+    top: vs(100, h),
+    borderRadius: ms(10, w),
     flexDirection: 'row',
     backgroundColor: theme.colors.white,
-  },
-  iconContainer: {
+    elevation: 5,
+  }),
+  iconContainer: (w, h) => ({
     width: '40%',
     backgroundColor: '#DEEBFF',
     height: '100%',
     paddingHorizontal: '10%',
-  },
-  loginFormContainer: {
+    borderTopLeftRadius: ms(10, w),
+    borderBottomLeftRadius: ms(10, w),
+  }),
+  loginFormContainer: (w, h) => ({
     width: '60%',
     height: '100%',
-    paddingHorizontal: '6%',
-    paddingVertical: '3%',
-  },
-  heading: {
-    fontSize: ms(35),
-    paddingTop: vs(30),
+    paddingHorizontal: s(55, w),
+    paddingVertical: vs(20, h),
+  }),
+  heading: (w, h) => ({
+    fontSize: ms(35, w),
+    paddingTop: vs(30, h),
     textAlign: 'center',
     paddingBottom: '10%',
-  },
-  labelText: {
-    fontSize: ms(16),
+    fontFamily: theme.fonts.openSansBold,
+  }),
+  labelText: (w, h) => ({
+    fontSize: ms(20, h),
     color: theme.colors.labelText,
-    paddingTop: vs(46),
-    paddingBottom: vs(14),
-    fontWeight: '600',
-  },
-  button: {
-    marginTop: vs(4),
-    alignSelf: 'flex-end',
-  },
-  bottomText: {
+    paddingTop: vs(36, h),
+    paddingBottom: vs(14, h),
+    fontFamily: theme.fonts.openSansRegular,
+  }),
+  input: (w, h) => ({
+    color: theme.colors.input,
+    backgroundColor: theme.colors.inputBackground,
+    fontFamily: theme.fonts.openSansRegular,
+    fontSize: ms(13, w),
+  }),
+  bottomText: (w, h) => ({
     width: '100%',
-    // height: 100,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // backgroundColor: 'red',
-  },
+    alignItems: 'center',
+    marginTop: vs(14, h),
+    marginBottom: vs(42, h),
+  }),
+  rememberView: (w, h) => ({
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: s(6, w),
+  }),
+  buttonStyle: (w, h) => ({height: vs(52, h)}),
+  textStyle: (w, h) => ({fontSize: ms(18, w)}),
   extraMargin: (margin, value) => ({
     [margin]: value,
   }),
