@@ -1,32 +1,17 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
 import {Box, Button, Checkbox} from '@components';
+import {theme} from '@utils';
 import styles from '../styles';
 
-const mockInspections = [
-  {
-    id: 100001,
-    title: 'XYZ Capital- Zed commons-Zelda 2*2 950',
-    status: 'In progress',
-    date: '4/10/2023',
-    property: 'Zed Commons',
-  },
-  {
-    id: 100002,
-    title: 'XYZ Capital- Zed commons-Zelda 2*2 950',
-    status: 'Resolved',
-    date: '3/31/2023',
-    property: 'Zed Commons',
-  },
-];
-
-const HeaderTitle = ({title, style}) => {
+const HeaderTitle = ({title, dimensions: {width, height}, style}) => {
+  console.log('dimensions', width, height);
   return (
     <Box style={style}>
       <Button
         title={title}
         buttonStyle={styles.headerTitleButton}
-        textStyle={styles.headerTitleText}
+        buttonTextStyle={styles.headerTitleText(width, height)}
       />
     </Box>
   );
@@ -37,30 +22,35 @@ const RenderListHeader = ({width, height}) => {
     <Box style={styles.listHeader(width, height)}>
       <HeaderTitle
         title={'Insp #'}
-        style={styles.headerTitle(width, height, '15%')}
+        dimensions={{width, height}}
+        style={styles.headerTitle(width, height, '13%')}
       />
       <HeaderTitle
         title={'Inspection Title'}
-        style={styles.headerTitle(width, height, '40%')}
+        dimensions={{width, height}}
+        style={styles.headerTitle(width, height, '37%')}
       />
       <HeaderTitle
         title={'Status'}
-        style={styles.headerTitle(width, height, '15%')}
+        dimensions={{width, height}}
+        style={styles.headerTitle(width, height, '12%')}
       />
       <HeaderTitle
         title={'Due Date'}
-        style={styles.headerTitle(width, height, '15%')}
+        dimensions={{width, height}}
+        style={styles.headerTitle(width, height, '12.6%')}
       />
       <HeaderTitle
         title={'Property'}
-        style={styles.headerTitle(width, height, '15%')}
+        dimensions={{width, height}}
+        style={styles.headerTitle(width, height, '14.4%')}
       />
     </Box>
   );
 };
 
 const RenderList = ({
-  item: {id, title, status, date, property},
+  item: {id, inspectionName, status, dueDate},
   width,
   height,
 }) => {
@@ -68,34 +58,64 @@ const RenderList = ({
     isChecked: false,
   });
 
+  let statusBackground = 'none';
+  let statusText = theme.colors.black;
+  let property = inspectionName?.split(',')?.[1];
+
   let setCheckboxValue = () => {
     setState(prev => ({...prev, isChecked: !state.isChecked}));
   };
 
+  if (status === 'InProgress') {
+    statusBackground = theme.colors.inProgressBg;
+    statusText = theme.colors.inProgressText;
+  } else if (status === 'Resolved') {
+    statusBackground = theme.colors.inProgressBg;
+    statusText = theme.colors.inProgressText;
+  } else if (status === 'Open' || status === 'Expired') {
+    statusBackground = theme.colors.openBg;
+    statusText = theme.colors.openText;
+  }
+
   return (
     <Box style={styles.listContainer(width, height)}>
-      <Box style={styles.listCategoryContainer(width, height, '15%')}>
+      <Box style={styles.listCategoryContainer(width, height, '13%')}>
         <Checkbox
+          bordered
           variant={'checkbox'}
           isChecked={state.isChecked}
           setCheckboxValue={setCheckboxValue}
         />
-        <Text>{id}</Text>
+        <Text style={styles.tableText(width, height)}>{id || ''}</Text>
       </Box>
-      <Box style={styles.listCategoryContainer(width, height, '40%')}>
-        <Text>{title}</Text>
+      <Box style={styles.listCategoryContainer(width, height, '37%')}>
+        <Text style={styles.tableText(width, height)}>
+          {inspectionName || ''}
+        </Text>
       </Box>
-      <Box style={styles.listCategoryContainer(width, height, '15%')}>
-        <Text>{status}</Text>
+      <Box style={styles.listCategoryContainer(width, height, '13%')}>
+        <Box style={styles.statusContainer(width, height, statusBackground)}>
+          <Text
+            style={styles.tableText(
+              width,
+              height,
+              statusBackground,
+              statusText,
+              12,
+              2,
+            )}>
+            {status || ''}
+          </Text>
+        </Box>
       </Box>
-      <Box style={styles.listCategoryContainer(width, height, '15%')}>
-        <Text>{date}</Text>
+      <Box style={styles.listCategoryContainer(width, height, '13%')}>
+        <Text style={styles.tableText(width, height)}>{dueDate || ''}</Text>
       </Box>
-      <Box style={styles.listCategoryContainer(width, height, '15%')}>
-        <Text>{property}</Text>
+      <Box style={styles.listCategoryContainer(width, height, '13%')}>
+        <Text style={styles.tableText(width, height)}>{property || ''}</Text>
       </Box>
     </Box>
   );
 };
 
-export {RenderListHeader, RenderList, mockInspections};
+export {RenderListHeader, RenderList};

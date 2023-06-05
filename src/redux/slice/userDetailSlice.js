@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
-export const userDetailsSlice = createSlice({ 
-  name: "userDetails",
+export const userDetailsSlice = createSlice({
+  name: 'userDetails',
   initialState: {
-    username: "",
-    full_name: "",
+    username: '',
+    full_name: '',
     is_pmc: false,
     is_supplier: false,
-    time_zone: "",
-    time_zone_info: "",
+    time_zone: '',
+    time_zone_info: '',
     subscription_module_list: [],
     work_order_policy: {},
     inspection_policy: {},
@@ -36,6 +36,6 @@ export const userDetailsSlice = createSlice({
   },
 });
 
-export const { setUserDetails } = userDetailsSlice.actions;
+export const {setUserDetails} = userDetailsSlice.actions;
 
 export default userDetailsSlice.reducer;

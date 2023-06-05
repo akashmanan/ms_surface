@@ -1,22 +1,49 @@
-import {Dimensions} from 'react-native';
-import {SIZE_MATTERS_BASE_HEIGHT, SIZE_MATTERS_BASE_WIDTH} from '@env';
+import {Dimensions, Platform} from 'react-native';
+import {
+  SIZE_MATTERS_BASE_HEIGHT,
+  SIZE_MATTERS_BASE_WIDTH,
+  SIZE_MATTERS_BASE_WIDTH_WINDOWS,
+  SIZE_MATTERS_BASE_HEIGHT_WINDOWS,
+} from '@env';
+import {
+  s as sizeMatterS,
+  vs as sizeMatterVS,
+  ms as sizeMatterMS,
+} from 'react-native-size-matters/extend';
 
 const {width, height} = Dimensions.get('screen');
 
-const guidelineBaseWidth = SIZE_MATTERS_BASE_WIDTH;
-const guidelineBaseHeight = SIZE_MATTERS_BASE_HEIGHT;
-
-Dimensions.addEventListener('change', val => {});
+const guidelineBaseWidth =
+  Platform.OS === 'windows'
+    ? SIZE_MATTERS_BASE_WIDTH_WINDOWS
+    : SIZE_MATTERS_BASE_WIDTH;
+const guidelineBaseHeight =
+  Platform.OS === 'windows'
+    ? SIZE_MATTERS_BASE_HEIGHT_WINDOWS
+    : SIZE_MATTERS_BASE_HEIGHT;
 
 const s = (size, w = width) => {
-  let scale = (Number(w.toFixed()) / guidelineBaseWidth) * size;
-  return scale;
+  if (Platform.OS !== 'windows') {
+    return sizeMatterS(size);
+  } else {
+    return (Number(w.toFixed()) / guidelineBaseWidth) * size;
+  }
 };
+
 const vs = (size, h = height) => {
-  let verticalScale = (Number(h.toFixed()) / guidelineBaseHeight) * size;
-  return verticalScale;
+  if (Platform.OS !== 'windows') {
+    return sizeMatterVS(size);
+  } else {
+    return (Number(h.toFixed()) / guidelineBaseHeight) * size;
+  }
 };
-const ms = (size, w = width, factor = 0.5) =>
-  size + (s(w, size) - size) * factor;
+
+const ms = (size, w = width, factor = 0.5) => {
+  if (Platform.OS !== 'windows') {
+    return sizeMatterMS(size);
+  } else {
+    return size + (s(w, size) - size) * factor;
+  }
+};
 
 export {s, vs, ms};

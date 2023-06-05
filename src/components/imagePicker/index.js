@@ -6,7 +6,7 @@ const ImagePicker = ({type, success}) => {
     selectionLimit: 1,
     mediaType: 'photo',
   };
-  if (type == 'camera') {
+  if (type === 'camera') {
     launchCamera(options)
       .then(image => {
         success(image);

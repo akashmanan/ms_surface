@@ -1,21 +1,27 @@
-import {StyleSheet} from 'react-native';
-import {theme, s, vs} from '@utils';
+import {Platform, StyleSheet} from 'react-native';
+import {theme, s, vs, ms} from '@utils';
 
 const styles = StyleSheet.create({
   container: (w, h) => ({
     flex: 1,
-    paddingHorizontal: s(64, w),
-    paddingTop: vs(39, h),
+    backgroundColor: theme.colors.white,
+    paddingLeft: Platform.OS === 'windows' ? s(64, w) : s(20, w),
   }),
   headerTitle: (w, h, width) => ({
     width: width,
+    paddingVertical: vs(10, h),
+  }),
+  headerTitleText: (w, h) => ({
+    fontSize: ms(16, w),
+    textAlign: 'center',
   }),
   list: {
     flex: 1,
+    backgroundColor: theme.colors.white,
   },
   listHeader: (w, h) => ({
     width: '100%',
-    height: vs(50, h),
+    minHeight: vs(50, h),
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -35,14 +41,33 @@ const styles = StyleSheet.create({
   listCategoryContainer: (w, h, width) => ({
     width: width,
     flexDirection: 'row',
-    columnGap: 10,
+    columnGap: s(4, w),
     alignItems: 'center',
+    marginRight: vs(10, h),
   }),
   headerTitleButton: {
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
-  headerTitleText: {textAlign: 'center'},
+  statusContainer: (w, h, backgroundColor) => ({
+    backgroundColor,
+    borderRadius: ms(16, w),
+  }),
+  tableText: (
+    w,
+    h,
+    backgroundColor,
+    color = theme.colors.black,
+    ph = 0,
+    pv = 0,
+  ) => ({
+    color,
+    fontSize: ms(14, w),
+    borderRadius: ms(16, w),
+    backgroundColor,
+    paddingHorizontal: s(ph, w),
+    paddingVertical: vs(pv, h),
+  }),
 });
 
 export default styles;

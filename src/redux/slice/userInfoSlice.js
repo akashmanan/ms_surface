@@ -1,26 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
 export const userInfoSlice = createSlice({
-  name: "userInfo",
+  name: 'userInfo',
   initialState: {
-    id: "",
-    company_id: "",
+    id: '',
+    company_id: '',
     user_type_id: false,
     user_status_id: false,
-    access_level_id: "",
-    access_level_type: "",
-    email: "",
-    username: "",
-    first_name: "",
-    last_name: "",
-    full_name: "",
-    city: "",
-    state: "",
-    country: "",
-    zip: "",
-    phone: "",
-    mobile: "",
-    time_zone: "",
+    access_level_id: '',
+    access_level_type: '',
+    email: '',
+    username: '',
+    first_name: '',
+    last_name: '',
+    full_name: '',
+    city: '',
+    state: '',
+    country: '',
+    zip: '',
+    phone: '',
+    mobile: '',
+    time_zone: '',
     session_timeout: null,
     image_url: {},
     is_enable: false,
@@ -29,7 +29,7 @@ export const userInfoSlice = createSlice({
     is_auto_check_in_out_wo_flag: false,
     last_sign_in_at: null,
     created_at: null,
-    time_zone_info: "",
+    time_zone_info: '',
     company: {},
     user_type: {},
     nte_amount_policy: {},
@@ -76,6 +76,6 @@ export const userInfoSlice = createSlice({
   },
 });
 
-export const { setUserInfoInformation } = userInfoSlice.actions;
+export const {setUserInfoInformation} = userInfoSlice.actions;
 
 export default userInfoSlice.reducer;

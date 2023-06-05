@@ -1,33 +1,51 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from 'react-native';
+import {Text, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Box} from '@components';
 import {theme, ms} from '@utils';
+import styles from './styles';
 
-const Checkbox = ({variant, title, isChecked, setCheckboxValue}) => {
+const Checkbox = ({
+  variant,
+  bordered,
+  title,
+  isChecked,
+  setCheckboxValue,
+  textStyle,
+}) => {
   const {width, height} = useWindowDimensions();
 
   if (variant === 'checkbox') {
     let style = {
-      borderRadius: ms(4, width),
+      borderRadius: bordered ? 0 : ms(4, width),
+      backgroundColor: !bordered
+        ? 'rgba(28, 55, 90, 0.16)'
+        : bordered && !isChecked
+        ? theme.colors.white
+        : theme.colors.checkBoxBorderFill,
+      borderWidth: bordered ? 1 : 0,
+      borderColor: !bordered
+        ? 'none'
+        : bordered && !isChecked
+        ? theme.colors.checkBoxBorder
+        : theme.colors.checkBoxBorderFill,
     };
     return (
-      <Box style={styles.container}>
+      <Box style={styles.container(width, height)}>
         <TouchableOpacity
           style={styles.buttonStyle(width, height, style)}
           onPress={setCheckboxValue}>
           {isChecked && (
-            <Entypo name="check" size={13} color={theme.colors.bottomText} />
+            <Entypo
+              name="check"
+              size={ms(13, width)}
+              color={bordered ? theme.colors.white : theme.colors.bottomText}
+            />
           )}
         </TouchableOpacity>
         {title && (
           <TouchableOpacity onPress={setCheckboxValue}>
-            <Text>{title}</Text>
+            <Text style={styles.titleStyle(textStyle)}>{title}</Text>
           </TouchableOpacity>
         )}
       </Box>
@@ -35,9 +53,12 @@ const Checkbox = ({variant, title, isChecked, setCheckboxValue}) => {
   } else if (variant === 'radio') {
     let style = {
       borderRadius: ms(100),
+      borderWidth: 1,
+      borderColor: theme.colors.bottomText,
+      padding: ms(10, width),
     };
     return (
-      <Box style={styles.container}>
+      <Box style={styles.container(width, height)}>
         <TouchableOpacity
           style={styles.buttonStyle(width, height, style)}
           onPress={setCheckboxValue}>
@@ -45,7 +66,7 @@ const Checkbox = ({variant, title, isChecked, setCheckboxValue}) => {
         </TouchableOpacity>
         {title && (
           <TouchableOpacity onPress={setCheckboxValue}>
-            <Text>{title}</Text>
+            <Text style={styles.titleStyle(textStyle)}>{title}</Text>
           </TouchableOpacity>
         )}
       </Box>
@@ -54,27 +75,3 @@ const Checkbox = ({variant, title, isChecked, setCheckboxValue}) => {
 };
 
 export {Checkbox};
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    columnGap: 10,
-    alignItems: 'center',
-    zIndex: -1,
-  },
-  buttonStyle: (w, h, style) => ({
-    width: ms(18, w),
-    height: ms(18, w),
-    backgroundColor: 'rgba(28, 55, 90, 0.16)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...style,
-  }),
-  radioButton: (w, h) => ({
-    width: ms(10, w),
-    height: ms(10, w),
-    borderRadius: ms(100),
-    alignSelf: 'center',
-    backgroundColor: theme.colors.bottomText,
-  }),
-});

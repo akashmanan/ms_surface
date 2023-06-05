@@ -1,12 +1,17 @@
 import {instance} from '../../instance';
 import humps from 'humps';
 import storage from '@utils/asyncStorage';
-import {setUserLogin} from '../../../redux/slice/authSlice';
+import {
+  setUserLogin,
+  enableLoader,
+  setErrorMsg,
+} from '../../../redux/slice/authSlice';
 import Config from '@utils/apiURLs';
 import SetCookies from '@utils/setCookie';
 import inspectionListing from '../inspectionListing/index';
 
 export default login = async (username, password, dispatch) => {
+  dispatch(enableLoader());
   await instance
     .post(
       `${Config.USER_LOGIN}`,
@@ -30,6 +35,7 @@ export default login = async (username, password, dispatch) => {
       }
     })
     .catch(error => {
+      dispatch(setErrorMsg(error?.message));
       console.log('error in login API:', error);
     });
 };

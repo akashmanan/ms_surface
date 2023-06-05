@@ -1,17 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, useWindowDimensions} from 'react-native';
-import {Box, ScreenName} from '@components';
-import {RenderListHeader, RenderList, mockInspections} from './widgets';
-import styles from './styles';
+import React, {useEffect} from 'react';
+import {FlatList, useWindowDimensions, ScrollView} from 'react-native';
+import {Box, ScreenName, BottomButtonBar} from '@components';
+import {RenderListHeader, RenderList} from './widgets';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {inspectionListing} from '@services/api';
+import styles from './styles';
 
 const InspectionListing = () => {
   const {width, height} = useWindowDimensions();
-  const navigaiton = useNavigation();
-  const [state, setState] = useState({});
   const dispatch = useDispatch();
+  const navigaiton = useNavigation();
+
+  const {inspectionList} = useSelector(state => state.inspectionListReducer);
 
   useEffect(() => {
     inspectionListing(1, dispatch);
@@ -22,24 +23,30 @@ const InspectionListing = () => {
   };
 
   return (
-    <Box style={styles.container(width, height)}>
-      <ScreenName
-        screenTitle={'Inspection'}
-        buttonTitle={'Create Inspection'}
-        onPress={navigateToCreateInspeciton}
-      />
-      <Box style={styles.list}>
-        <FlatList
-          data={mockInspections}
-          renderItem={props => (
-            <RenderList {...props} width={width} height={height} />
-          )}
-          ListHeaderComponent={props => (
-            <RenderListHeader {...props} width={width} height={height} />
-          )}
+    <>
+      <Box style={styles.container(width, height)}>
+        <ScreenName
+          screenTitle={'Inspection'}
+          buttonTitle={'Create Inspection'}
+          onPress={navigateToCreateInspeciton}
         />
+        <ScrollView style={styles.list} horizontal>
+          <FlatList
+            data={inspectionList}
+            ListHeaderComponent={props => (
+              <RenderListHeader {...props} width={width} height={height} />
+            )}
+            renderItem={props => (
+              <RenderList {...props} width={width} height={height} />
+            )}
+          />
+        </ScrollView>
       </Box>
-    </Box>
+      <BottomButtonBar
+        primaryButton={'Create Quote'}
+        outlineButton={'Copy Inspection'}
+      />
+    </>
   );
 };
 

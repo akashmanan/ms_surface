@@ -5,10 +5,10 @@ import {
   StyleSheet,
   Pressable,
   Platform,
+  useWindowDimensions,
 } from 'react-native';
-import {ms} from 'react-native-size-matters/extend';
-import {theme} from '@utils';
-import {Box} from '@components';
+import {theme, ms} from '@utils';
+import {Box, Loader} from '@components';
 
 const Button = ({
   title,
@@ -19,13 +19,17 @@ const Button = ({
   buttonTextStyle,
   foreground,
   borderless,
+  isLoading,
 }) => {
+  const {width, height} = useWindowDimensions();
   let newStyle = {};
   let newTextStyle = {};
   switch (variant) {
     case 'primary':
       newStyle = {
-        backgroundColor: theme.colors.primaryButton,
+        backgroundColor: !disabled
+          ? theme.colors.primaryButton
+          : theme.colors.primaryButtonDisabled,
         width: '100%',
         ...buttonStyle,
       };
@@ -62,7 +66,7 @@ const Button = ({
 
   let renderButton =
     Platform.OS === 'android' ? (
-      <Box style={[styles.baseStyle, newStyle]}>
+      <Box style={[styles.baseStyle(width, height), newStyle]}>
         <Pressable
           disabled={disabled}
           android_ripple={{
@@ -71,16 +75,24 @@ const Button = ({
             borderless: borderless ? true : false,
           }}
           onPress={onPress}
-          style={[styles.baseStyle, newStyle]}>
-          <Text style={[styles.title, newTextStyle]}>{title}</Text>
+          style={[styles.baseStyle(width, height), newStyle]}>
+          {isLoading ? (
+            <Loader color={theme.colors.white} size={'small'} />
+          ) : (
+            <Text style={[styles.title, newTextStyle]}>{title}</Text>
+          )}
         </Pressable>
       </Box>
     ) : (
       <TouchableOpacity
         onPress={onPress}
         disabled={disabled}
-        style={[styles.baseStyle, newStyle]}>
-        <Text style={[styles.title, newTextStyle]}>{title}</Text>
+        style={[styles.baseStyle(width, height), newStyle]}>
+        {isLoading ? (
+          <Loader color={theme.colors.white} size={'small'} />
+        ) : (
+          <Text style={[styles.title, newTextStyle]}>{title}</Text>
+        )}
       </TouchableOpacity>
     );
 
@@ -90,11 +102,12 @@ const Button = ({
 export {Button};
 
 const styles = StyleSheet.create({
-  baseStyle: {
+  baseStyle: (w, h) => ({
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: ms(8),
-  },
+    borderRadius: ms(8, w),
+    overflow: 'hidden',
+  }),
   title: {
     textAlign: 'center',
   },

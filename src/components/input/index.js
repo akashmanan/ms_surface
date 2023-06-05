@@ -27,19 +27,41 @@ const EyeIcon = ({showPassword, setShowPassword}) => {
 
 const Input = props => {
   const {width, height} = useWindowDimensions();
-  let {showPassword, setShowPassword, icon, style, containerStyle, bottomText} =
-    props;
+  let {
+    icon,
+    style,
+    isError,
+    bottomText,
+    inputTitle,
+    showPassword,
+    containerStyle,
+    bottomTextStyle,
+    setShowPassword,
+  } = props;
 
   return (
     <Box style={styles.container(containerStyle)}>
-      <TextInput style={styles.textInput(width, height, style)} {...props} />
-      {icon && (
-        <EyeIcon
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-        />
+      {inputTitle && (
+        <Text style={styles.inputTitle(width, height)}>{inputTitle}</Text>
       )}
-      <Text style={styles.bottomText(width, height)}>{bottomText}</Text>
+      <Box style={styles.inputContainer}>
+        <TextInput
+          {...props}
+          placeholderTextColor={theme.colors.inputPlaceholder}
+          style={styles.textInput(width, height, style)}
+        />
+        {icon && (
+          <EyeIcon
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          />
+        )}
+      </Box>
+      {bottomText && (
+        <Text style={styles.bottomText(width, height, isError)}>
+          {bottomText}
+        </Text>
+      )}
     </Box>
   );
 };
@@ -48,13 +70,15 @@ export {Input};
 
 const styles = StyleSheet.create({
   container: containerStyle => ({
-    flexDirection: 'row',
-    borderRadius: ms(3),
+    zIndex: -1,
     ...containerStyle,
   }),
+  inputContainer: {
+    flexDirection: 'row',
+  },
   textInput: (w, h, style) => ({
     width: '100%',
-    borderRadius: ms(3),
+    borderRadius: ms(3, w),
     minHeight: vs(45, h),
     maxHeight: vs(80, h),
     paddingVertical: vs(14, h),
@@ -72,8 +96,16 @@ const styles = StyleSheet.create({
     right: s(4, w),
     borderRadius: ms(4),
   }),
-  bottomText: (w, h) => ({
-    fontSize: ms(10, w),
-    color: 'red',
+  inputTitle: (w, h) => ({
+    fontSize: ms(14, w),
+    paddingBottom: vs(14, h),
+    color: theme.colors.labelText,
+  }),
+  bottomText: (w, h, isError) => ({
+    paddingTop: vs(9, h),
+    fontSize: ms(12, w),
+    // fontStyle: 'italic',
+    fontFamily: theme.fonts.openSansRegular,
+    color: isError ? theme.colors.bottomTextError : theme.colors.bottomText,
   }),
 });

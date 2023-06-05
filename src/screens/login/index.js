@@ -1,49 +1,41 @@
 import React, {useState} from 'react';
 import {Text, Platform, useWindowDimensions} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import {login} from '../../services/api';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, Image, Input, Checkbox, Box} from '@components';
+import {login} from '@services/api';
+import {theme} from '@utils';
 import styles from './styles';
 
-const Login = props => {
-  const navigation = useNavigation();
+const Login = () => {
+  console.log('rendered');
   const {width, height} = useWindowDimensions();
+  const dispatch = useDispatch();
+  const {isLoading, errorMsg} = useSelector(state => state.authReducer);
   const [state, setState] = useState({
     email: '',
     password: '',
     isChecked: false,
     showPassword: false,
     disabled: true,
-    isChecked: false,
     isRaidoSelected: false,
     radioValue: '',
   });
 
-  const dispatch = useDispatch();
-
   const onPressSignIn = () => {
-    login(state.email, state.password, dispatch).then(res => {
-      props.navigation.navigate('InspectionListing');
-    });
+    login(state.email, state.password, dispatch);
   };
 
   const onChangeEmail = text => {
-    if (text) {
-      setState(prev => ({...prev, email: text, disabled: false}));
-    }
+    setState(prev => ({...prev, email: text}));
   };
 
   const onChangePassword = text => {
-    if (text) {
-      setState(prev => ({...prev, password: text, disabled: false}));
-    }
+    setState(prev => ({...prev, password: text}));
   };
 
   const setShowPassword = () => {
     setState(prev => ({...prev, showPassword: !state.showPassword}));
   };
-  let {showPassword, image} = state;
 
   let setCheckboxValue = () => {
     setState(prev => ({...prev, isChecked: !state.isChecked}));
@@ -75,18 +67,22 @@ const Login = props => {
           <Text style={styles.labelText(width, height)}>Email</Text>
           <Input
             placeholder="Email Address"
-            extraStyle={styles.input(width, height)}
+            placeholderTextColor={theme.colors.inputPlaceholder}
+            style={styles.input(width, height)}
             onChangeText={onChangeEmail}
           />
           <Text style={styles.labelText(width, height)}>Password</Text>
           <Input
-            placeholder="Password"
-            secureTextEntry={!state.showPassword}
             icon={true}
+            placeholder="Password"
+            placeholderTextColor={theme.colors.inputPlaceholder}
+            secureTextEntry={!state.showPassword}
             setShowPassword={setShowPassword}
             showPassword={state.showPassword}
-            extraStyle={styles.input(width, height)}
+            style={styles.input(width, height)}
             onChangeText={onChangePassword}
+            bottomText={errorMsg}
+            isError={true}
           />
           <Box style={styles.bottomText(width, height)}>
             <Box style={styles.rememberView(width, height)}>
@@ -95,9 +91,24 @@ const Login = props => {
                 title={'Remember me?'}
                 isChecked={state.isChecked}
                 setCheckboxValue={setCheckboxValue}
+                textStyle={styles.bottomButtonText(
+                  width,
+                  height,
+                  16,
+                  theme.colors.rememberMe,
+                )}
               />
             </Box>
-            <Button title={'Forgot Password?'} onPress={() => {}} />
+            <Button
+              title={'Forgot Password?'}
+              onPress={() => {}}
+              buttonTextStyle={styles.bottomButtonText(
+                width,
+                height,
+                14,
+                theme.colors.bottomText,
+              )}
+            />
           </Box>
           <Button
             variant={'primary'}
@@ -105,6 +116,8 @@ const Login = props => {
             textStyle={styles.textStyle(width, height)}
             title={'Log In'}
             onPress={onPressSignIn}
+            disabled={!state.email || !state.password}
+            isLoading={isLoading}
           />
         </Box>
       </Box>
