@@ -19,7 +19,7 @@ import {
   ImagePicker,
 } from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 import styles from './styles';
 
 const CreateInspection = () => {

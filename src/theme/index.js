@@ -35,6 +35,7 @@ const colors = {
   radioBorder: '#707070',
   labelText: 'rgba(27, 43, 65, 0.72)',
   inputBackground: '#e9ecf0',
+  
   loginHeading: '#263238',
   input: '#18273A',
   inputPlaceholder: 'rgba(28, 48, 74, 0.5)',
@@ -59,6 +60,9 @@ const colors = {
   resolvedText: '#006644',
   openBg: '#5C6982',
   openText: '#EBECF0',
+  outlineButtonDisabled: '#99c4f1',
+  bottomBarBorder: 'rgba(0,0,0,0.1)',
+  tableBorder: '#EEEEEE',
 };
 
 const theme = {
