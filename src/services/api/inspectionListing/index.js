@@ -1,6 +1,6 @@
-import {instance} from '../../instance';
+import {instance} from '../../interceptors/axios';
 import humps from 'humps';
-import Config from '../../../utils/apiURLs';
+import Config from '../apiURLs';
 import store from '../../../redux/store';
 import {setInspectionList} from '../../../redux/slice/inspectionListing';
 

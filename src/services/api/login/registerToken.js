@@ -1,5 +1,5 @@
-import asyncStorage from '@utils/asyncStorage';
-import Config from '../../../utils/apiURLs';
+import asyncStorage from '@thirdParty/storage';
+import Config from './../apiURLs';
 import {instance} from '../../instance';
 export default registerToken = async (accessToken, userId, userName) => {
   let token = await asyncStorage.getDeviceToken('deviceToken');
