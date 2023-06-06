@@ -10,7 +10,7 @@ import {
 import {theme, ms} from '@utils';
 import {Box, Loader} from '@components';
 
-const Button = ({
+const Buttons = ({
   title,
   onPress,
   variant,
@@ -22,40 +22,55 @@ const Button = ({
   isLoading,
 }) => {
   const {width, height} = useWindowDimensions();
-  let newStyle = {};
-  let newTextStyle = {};
+  let buttonStyles = {};
+  let buttonTextStyles = {};
   switch (variant) {
     case 'primary':
-      newStyle = {
+      buttonStyles = {
         backgroundColor: !disabled
           ? theme.colors.primaryButton
           : theme.colors.primaryButtonDisabled,
         width: '100%',
         ...buttonStyle,
       };
-      newTextStyle = {
+      buttonTextStyles = {
         color: theme.colors.white,
         ...buttonTextStyle,
       };
       break;
     case 'outline':
-      newStyle = {
+      buttonStyles = {
         backgroundColor: theme.colors.white,
         borderWidth: 1,
-        borderColor: theme.colors.buttonBorder,
+        borderColor: !disabled
+          ? theme.colors.buttonBorder
+          : theme.colors.outlineButtonDisabled,
         width: '100%',
         ...buttonStyle,
       };
-      newTextStyle = {
-        color: theme.colors.buttonBorder,
+      buttonTextStyles = {
+        color: !disabled
+          ? theme.colors.buttonBorder
+          : theme.colors.outlineButtonDisabled,
+        ...buttonTextStyle,
+      };
+      break;
+    case 'cancel':
+      buttonStyles = {
+        backgroundColor: theme.colors.cancelButton,
+        width: '100%',
+        ...buttonStyle,
+      };
+      buttonTextStyles = {
+        color: theme.colors.cancelButtonText,
         ...buttonTextStyle,
       };
       break;
     default:
-      newStyle = {
+      buttonStyles = {
         ...buttonStyle,
       };
-      newTextStyle = {
+      buttonTextStyles = {
         color: theme.colors.bottomText,
         paddingHorizontal: 0,
         paddingVertical: 0,
@@ -64,9 +79,9 @@ const Button = ({
       break;
   }
 
-  let renderButton =
-    Platform.OS === 'android' ? (
-      <Box style={[styles.baseStyle(width, height), newStyle]}>
+  if (Platform.OS === 'android') {
+    return (
+      <Box style={[styles.baseStyle(width, height), buttonStyles]}>
         <Pressable
           disabled={disabled}
           android_ripple={{
@@ -75,31 +90,32 @@ const Button = ({
             borderless: borderless ? true : false,
           }}
           onPress={onPress}
-          style={[styles.baseStyle(width, height), newStyle]}>
+          style={[styles.baseStyle(width, height), buttonStyles]}>
           {isLoading ? (
             <Loader color={theme.colors.white} size={'small'} />
           ) : (
-            <Text style={[styles.title, newTextStyle]}>{title}</Text>
+            <Text style={[styles.title, buttonTextStyles]}>{title}</Text>
           )}
         </Pressable>
       </Box>
-    ) : (
+    );
+  } else {
+    return (
       <TouchableOpacity
         onPress={onPress}
         disabled={disabled}
-        style={[styles.baseStyle(width, height), newStyle]}>
+        style={[styles.baseStyle(width, height), buttonStyles]}>
         {isLoading ? (
           <Loader color={theme.colors.white} size={'small'} />
         ) : (
-          <Text style={[styles.title, newTextStyle]}>{title}</Text>
+          <Text style={[styles.title, buttonTextStyles]}>{title}</Text>
         )}
       </TouchableOpacity>
     );
-
-  return renderButton;
+  }
 };
 
-export {Button};
+export {Buttons};
 
 const styles = StyleSheet.create({
   baseStyle: (w, h) => ({

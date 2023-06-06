@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     minHeight: vs(50, h),
     maxHeight: vs(80, h),
     borderWidth: 1,
-    borderColor: '#EEEEEE',
+    borderColor: theme.colors.tableBorder,
     paddingLeft: s(10, w),
   }),
   listCategoryContainer: (w, h, width) => ({
@@ -44,6 +44,14 @@ const styles = StyleSheet.create({
     columnGap: s(4, w),
     alignItems: 'center',
     marginRight: vs(10, h),
+  }),
+  listEmptyContainer: (w, h) => ({
+    width: w,
+    height: vs(50, h),
+    borderWidth: 1,
+    justifyContent: 'center',
+    borderColor: theme.colors.tableBorder,
+    paddingLeft: s(20, w),
   }),
   headerTitleButton: {
     justifyContent: 'flex-start',
@@ -68,6 +76,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: s(ph, w),
     paddingVertical: vs(pv, h),
   }),
+  button: (w, h) => ({
+    width: Platform.OS === 'windows' ? s(179, w) : s(149, w),
+    height: vs(40, h),
+  }),
+  buttonText: (w, h) => ({
+    fontSize: ms(16, w),
+    fontFamily: theme.fonts.latoRegular,
+  }),
+  bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(30, w)}),
 });
 
 export default styles;

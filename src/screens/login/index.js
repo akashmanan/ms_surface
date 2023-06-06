@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {Text, Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Button, Image, Input, Checkbox, Box} from '@components';
+import {Buttons, Image, Input, Choice, Box} from '@components';
 import {login} from '@services/api';
 import {theme} from '@utils';
 import styles from './styles';
 
 const Login = () => {
-  console.log('rendered');
   const {width, height} = useWindowDimensions();
   const dispatch = useDispatch();
   const {isLoading, errorMsg} = useSelector(state => state.authReducer);
@@ -47,7 +46,7 @@ const Login = () => {
         <Image
           type="offline"
           resizeMode={'stretch'}
-          path={require('@assets/loginBanner.png')}
+          path={require('../../../assets/images/loginBanner.png')}
           style={styles.bannerImage}
         />
       </Box>
@@ -57,7 +56,7 @@ const Login = () => {
             <Image
               type="offline"
               resizeMode={'contain'}
-              path={require('@assets/facilgoIcon.png')}
+              path={require('../../../assets/images/facilgoIcon.png')}
             />
           </Box>
         )}
@@ -86,7 +85,7 @@ const Login = () => {
           />
           <Box style={styles.bottomText(width, height)}>
             <Box style={styles.rememberView(width, height)}>
-              <Checkbox
+              <Choice
                 variant={'checkbox'}
                 title={'Remember me?'}
                 isChecked={state.isChecked}
@@ -99,7 +98,7 @@ const Login = () => {
                 )}
               />
             </Box>
-            <Button
+            <Buttons
               title={'Forgot Password?'}
               onPress={() => {}}
               buttonTextStyle={styles.bottomButtonText(
@@ -110,7 +109,7 @@ const Login = () => {
               )}
             />
           </Box>
-          <Button
+          <Buttons
             variant={'primary'}
             buttonStyle={styles.buttonStyle(width, height)}
             textStyle={styles.textStyle(width, height)}

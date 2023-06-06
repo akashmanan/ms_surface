@@ -5,7 +5,7 @@ import {Box} from '@components';
 import {theme, ms} from '@utils';
 import styles from './styles';
 
-const Checkbox = ({
+const Choice = ({
   variant,
   bordered,
   title,
@@ -74,4 +74,4 @@ const Checkbox = ({
   }
 };
 
-export {Checkbox};
+export {Choice};

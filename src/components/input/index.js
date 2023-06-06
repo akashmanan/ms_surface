@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
   bottomText: (w, h, isError) => ({
     paddingTop: vs(9, h),
     fontSize: ms(12, w),
-    // fontStyle: 'italic',
     fontFamily: theme.fonts.openSansRegular,
     color: isError ? theme.colors.bottomTextError : theme.colors.bottomText,
   }),

@@ -7,20 +7,16 @@ const Stack = createStackNavigator();
 
 const Navigation = () => {
   const {accessToken} = useSelector(state => state.authReducer);
-  console.log('accessToken', accessToken);
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      {!accessToken ? (
+      {/* {!accessToken ? (
         <Stack.Screen name="Login" component={Login} />
-      ) : (
-        <Stack.Group>
-          <Stack.Screen
-            name="InspectionListing"
-            component={InspectionListing}
-          />
-          <Stack.Screen name="CreateInspection" component={CreateInspection} />
-        </Stack.Group>
-      )}
+      ) : ( */}
+      <Stack.Group>
+        <Stack.Screen name="CreateInspection" component={CreateInspection} />
+        <Stack.Screen name="InspectionListing" component={InspectionListing} />
+      </Stack.Group>
+      {/* )} */}
     </Stack.Navigator>
   );
 };

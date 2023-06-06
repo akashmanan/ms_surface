@@ -12,6 +12,7 @@ const colors = {
   inputPlaceholder: 'rgba(28, 48, 74, 0.5)',
   primaryButton: '#1A46D9',
   primaryButtonDisabled: '#a3b5f0',
+  outlineButtonDisabled: '#99c4f1',
   buttonBorder: '#006CDB',
   ripple: 'rgba(100, 100, 100, 0.2)',
   bottomText: '#858585',
@@ -31,6 +32,8 @@ const colors = {
   resolvedText: '#006644',
   openBg: '#5C6982',
   openText: '#EBECF0',
+  bottomBarBorder: 'rgba(0,0,0,0.1)',
+  tableBorder: '#EEEEEE',
 };
 
 export {colors};

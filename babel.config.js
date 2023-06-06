@@ -29,7 +29,7 @@ module.exports = {
           '.json',
         ],
         alias: {
-          '@assets': './src/assets',
+          '@assets': './assets',
           '@components': './src/components',
           '@layout': './src/layout',
           '@navigation': './src/navigation',

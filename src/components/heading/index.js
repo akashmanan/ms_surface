@@ -1,15 +1,15 @@
 import React from 'react';
 import {Text, useWindowDimensions} from 'react-native';
-import {Box, Button} from '@components';
+import {Box, Buttons} from '@components';
 import styles from './styles';
 
-const ScreenName = ({screenTitle, buttonTitle, onPress}) => {
+const Heading = ({heading, buttonTitle, onPress}) => {
   const {width, height} = useWindowDimensions();
   return (
     <Box style={styles.header(width, height)}>
-      <Text style={styles.heading(width, height)}>{screenTitle}</Text>
+      <Text style={styles.heading(width, height)}>{heading}</Text>
       {buttonTitle && onPress && (
-        <Button
+        <Buttons
           variant={'primary'}
           title={buttonTitle}
           buttonStyle={styles.buttonStyle(width, height)}
@@ -21,4 +21,4 @@ const ScreenName = ({screenTitle, buttonTitle, onPress}) => {
   );
 };
 
-export {ScreenName};
+export {Heading};
