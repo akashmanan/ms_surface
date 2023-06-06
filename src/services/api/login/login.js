@@ -29,6 +29,6 @@ export default login = async (username, password, dispatch) => {
       }
     })
     .catch(error => {
-      console.log('error in login API:', error);
+      console.log('error in login API', error);
     });
 };
