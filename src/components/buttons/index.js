@@ -11,7 +11,7 @@ import {ms} from '@thirdParty/screenSize';
 import {theme} from '@theme'
 import {Box, Loader} from '@components';
 
-const Button = ({
+const Buttons = ({
   title,
   onPress,
   variant,
@@ -100,7 +100,7 @@ const Button = ({
   return renderButton;
 };
 
-export {Button};
+export {Buttons};
 
 const styles = StyleSheet.create({
   baseStyle: (w, h) => ({

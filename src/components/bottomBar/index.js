@@ -1,15 +1,15 @@
 import React from 'react';
 import {View, useWindowDimensions} from 'react-native';
-import {Button} from '@components';
+import {Buttons} from '@components';
 import {theme} from '@theme';
 import styles from './styles';
 
-const BottomButtonBar = ({primaryButton, outlineButton, cancelButton}) => {
+const BottomBar = ({primaryButton, outlineButton, cancelButton}) => {
   const {width, height} = useWindowDimensions();
   return (
     <View style={styles.container(width, height)}>
       {cancelButton && (
-        <Button
+        <Buttons
           title={cancelButton}
           variant={'primary'}
           onPress={() => {}}
@@ -22,7 +22,7 @@ const BottomButtonBar = ({primaryButton, outlineButton, cancelButton}) => {
         />
       )}
       {outlineButton && (
-        <Button
+        <Buttons
           title={primaryButton}
           variant={'outline'}
           onPress={() => {}}
@@ -35,7 +35,7 @@ const BottomButtonBar = ({primaryButton, outlineButton, cancelButton}) => {
         />
       )}
       {primaryButton && (
-        <Button
+        <Buttons
           title={primaryButton}
           variant={'primary'}
           onPress={() => {}}
@@ -47,4 +47,4 @@ const BottomButtonBar = ({primaryButton, outlineButton, cancelButton}) => {
   );
 };
 
-export {BottomButtonBar};
+export {BottomBar};

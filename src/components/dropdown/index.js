@@ -6,13 +6,13 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Box, Button} from '@components';
+import {Box, Buttons} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme'
 
 const RenderDropdownOption = ({title, onPress, buttonStyle, textStyle}) => {
   return (
-    <Button
+    <Buttons
       title={title}
       onPress={onPress}
       buttonStyle={buttonStyle}

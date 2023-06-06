@@ -6,7 +6,7 @@ import {ms} from '@thirdParty/screenSize';
 import {theme} from '@theme'
 import styles from './styles';
 
-const Checkbox = ({
+const Choice = ({
   variant,
   bordered,
   title,
@@ -75,4 +75,4 @@ const Checkbox = ({
   }
 };
 
-export {Checkbox};
+export {Choice};

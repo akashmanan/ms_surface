@@ -13,11 +13,11 @@ import {
   Box,
   Input,
   Image,
-  Checkbox,
+  Choice,
   Dropdown,
-  ScreenName,
+  Heading,
   ImagePicker,
-  BottomButtonBar,
+  BottomBar,
 } from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme'
@@ -81,7 +81,7 @@ const CreateInspection = () => {
         style={styles.container(width, height)}
         contentContainerStyle={styles.contentContainer(width, height)}
         keyboardShouldPersistTaps={'handled'}>
-        <ScreenName screenTitle={'Create Inspection'} />
+        <Heading screenTitle={'Create Inspection'} />
         <Box style={styles.inspectionFormContainer}>
           <Box style={styles.inspectionInputRow}>
             <Input
@@ -118,14 +118,14 @@ const CreateInspection = () => {
           </Box>
           <Box style={styles.inspectionInputRow}>
             <Box style={styles.radioButtonContainer(width, height)}>
-              <Checkbox
+              <Choice
                 bordered
                 variant={'radio'}
                 title={'First'}
                 isChecked={state.selectedRadio === 'First' ? true : false}
                 setCheckboxValue={() => setRadioButtonValue('First')}
               />
-              <Checkbox
+              <Choice
                 variant={'radio'}
                 title={'Second'}
                 isChecked={state.selectedRadio === 'Second' ? true : false}
@@ -164,7 +164,7 @@ const CreateInspection = () => {
               </ScrollView>
             </Box>
           </Box>
-          <Checkbox
+          <Choice
             variant={'checkbox'}
             title={'Check this value!'}
             isChecked={state.isChecked}
@@ -173,7 +173,7 @@ const CreateInspection = () => {
         </Box>
       </ScrollView>
       {!state.isKeyboardOpened && (
-        <BottomButtonBar primaryButton={'Create'} cancelButton={'Cancel'} />
+        <BottomBar primaryButton={'Create'} cancelButton={'Cancel'} />
       )}
     </>
   );

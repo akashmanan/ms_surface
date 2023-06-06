@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
-import {Box, Button, Checkbox} from '@components';
+import {Box, Buttons, Choice} from '@components';
 import {theme} from '@theme';
 import styles from '../styles';
 
@@ -8,7 +8,7 @@ const HeaderTitle = ({title, dimensions: {width, height}, style}) => {
   console.log('dimensions', width, height);
   return (
     <Box style={style}>
-      <Button
+      <Buttons
         title={title}
         buttonStyle={styles.headerTitleButton}
         buttonTextStyle={styles.headerTitleText(width, height)}
@@ -80,7 +80,7 @@ const RenderList = ({
   return (
     <Box style={styles.listContainer(width, height)}>
       <Box style={styles.listCategoryContainer(width, height, '13%')}>
-        <Checkbox
+        <Choice
           bordered
           variant={'checkbox'}
           isChecked={state.isChecked}

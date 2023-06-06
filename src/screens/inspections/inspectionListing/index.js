@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {FlatList, useWindowDimensions, ScrollView} from 'react-native';
-import {Box, ScreenName, BottomButtonBar} from '@components';
+import {Box, Heading, BottomBar} from '@components';
 import {RenderListHeader, RenderList} from './widgets';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -25,7 +25,7 @@ const InspectionListing = () => {
   return (
     <>
       <Box style={styles.container(width, height)}>
-        <ScreenName
+        <Heading
           screenTitle={'Inspection'}
           buttonTitle={'Create Inspection'}
           onPress={navigateToCreateInspeciton}
@@ -42,7 +42,7 @@ const InspectionListing = () => {
           />
         </ScrollView>
       </Box>
-      <BottomButtonBar
+      <BottomBar
         primaryButton={'Create Quote'}
         outlineButton={'Copy Inspection'}
       />
