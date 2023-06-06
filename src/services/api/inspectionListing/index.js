@@ -1,10 +1,10 @@
-import {instance} from '../../interceptors/axios';
 import humps from 'humps';
-import Config from '../apiURLs';
-import store from '../../../redux/store';
-import {setInspectionList} from '../../../redux/slice/inspectionListing';
+import store from '@redux/store';
+import {instance} from '@services/interceptors/axios';
+import {setInspectionList} from '@redux/slice/inspectionListing';
+import Config from '@services/api/apiURLs';
 
-export default inspectionListing = async (page, dispatch) => {
+const inspectionListing = async (page, dispatch) => {
   let state = store.getState();
   let token = state.authReducer.accessToken;
   await instance
@@ -25,3 +25,5 @@ export default inspectionListing = async (page, dispatch) => {
       return err;
     });
 };
+
+export default inspectionListing;

@@ -1,5 +1,5 @@
 import Cookies from 'universal-cookie';
-import Config from './apiURLs';
+import Config from '@services/api/apiURLs';
 
 const cookies = new Cookies();
 
@@ -24,5 +24,6 @@ export default function SetCookies(response) {
     )
     .then(done => {
       console.log('CookieManager.set =>', done);
-    });
+    })
+    .catch(error => console.log('error saving cookied', error));
 }

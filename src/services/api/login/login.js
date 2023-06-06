@@ -1,17 +1,13 @@
-import {instance} from '../../interceptors/axios';
 import humps from 'humps';
+import {instance} from '@services/interceptors/axios';
 import storage from '@thirdParty/storage';
-import {
-  setUserLogin,
-  enableLoader,
-  setErrorMsg,
-} from '../../../redux/slice/authSlice';
-import Config from './../apiURLs';
+import {setUserLogin, setLoader, setErrorMsg} from '@redux/slice/authSlice';
+import Config from '@services/api/apiURLs';
+import {inspectionListing} from '@services/api';
 import SetCookies from '@thirdParty/cookies';
-import inspectionListing from '../inspectionListing/index';
 
-export default login = async (username, password, dispatch) => {
-  dispatch(enableLoader());
+const login = async (username, password, dispatch) => {
+  dispatch(setLoader(true));
   await instance
     .post(
       `${Config.USER_LOGIN}`,
@@ -39,3 +35,5 @@ export default login = async (username, password, dispatch) => {
       console.log('error in login API:', error);
     });
 };
+
+export default login;

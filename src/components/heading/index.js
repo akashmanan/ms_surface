@@ -1,13 +1,19 @@
 import React from 'react';
-import {Text, useWindowDimensions} from 'react-native';
-import {Box, Buttons} from '@components';
+import {useWindowDimensions} from 'react-native';
+import {Box, Buttons, HeadingText} from '@components';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme';
 import styles from './styles';
 
 const Heading = ({heading, buttonTitle, onPress}) => {
   const {width, height} = useWindowDimensions();
   return (
     <Box style={styles.header(width, height)}>
-      <Text style={styles.heading(width, height)}>{heading}</Text>
+      <HeadingText
+        fontFamily={theme.fonts.latoBold}
+        fontColor={theme.colors.cancelButtonText}>
+        {heading}
+      </HeadingText>
       {buttonTitle && onPress && (
         <Buttons
           variant={'primary'}

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Text, Platform, useWindowDimensions} from 'react-native';
+import {Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {Buttons, Image, Input, Choice, Box} from '@components';
+import {Buttons, Image, Input, Choice, Box, Text} from '@components';
 import {login} from '@services/api';
 import {theme} from '@theme';
 import styles from './styles';
@@ -46,7 +46,7 @@ const Login = () => {
         <Image
           type="offline"
           resizeMode={'stretch'}
-          path={require('../../../assets/images/loginBanner.png')}
+          path={require('@assets/images/loginBanner.png')}
           style={styles.bannerImage}
         />
       </Box>
@@ -56,21 +56,40 @@ const Login = () => {
             <Image
               type="offline"
               resizeMode={'contain'}
-              path={require('../../../assets/images/facilgoIcon.png')}
+              path={require('@assets/images/facilgoIcon.png')}
             />
           </Box>
         )}
 
         <Box style={styles.loginFormContainer(width, height)}>
-          <Text style={styles.heading(width, height)}>Log in</Text>
-          <Text style={styles.labelText(width, height)}>Email</Text>
+          <Text
+            fontSize={33}
+            fontColor={theme.colors.loginHeading}
+            fontFamily={theme.fonts.openSansBold}
+            textAlign={'center'}
+            style={styles.heading(width, height)}>
+            Log in
+          </Text>
+          <Text
+            fontSize={19}
+            fontColor={theme.colors.labelText}
+            fontFamily={theme.fonts.openSansRegular}
+            style={styles.labelText(width, height)}>
+            Email
+          </Text>
           <Input
             placeholder="Email Address"
             placeholderTextColor={theme.colors.inputPlaceholder}
             style={styles.input(width, height)}
             onChangeText={onChangeEmail}
           />
-          <Text style={styles.labelText(width, height)}>Password</Text>
+          <Text
+            fontSize={19}
+            fontColor={theme.colors.labelText}
+            fontFamily={theme.fonts.openSansRegular}
+            style={styles.labelText(width, height)}>
+            Password
+          </Text>
           <Input
             icon={true}
             placeholder="Password"

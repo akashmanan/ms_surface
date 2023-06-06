@@ -1,6 +1,6 @@
 import {Platform, StyleSheet} from 'react-native';
 import {s, vs, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,19 +42,12 @@ const styles = StyleSheet.create({
     paddingVertical: vs(20, h),
   }),
   heading: (w, h) => ({
-    fontSize: ms(33, w),
     paddingTop: vs(18, h),
-    textAlign: 'center',
     paddingBottom: '10%',
-    color: theme.colors.loginHeading,
-    fontFamily: theme.fonts.openSansBold,
   }),
   labelText: (w, h) => ({
-    fontSize: ms(19, h),
-    color: theme.colors.labelText,
     paddingTop: vs(32, h),
     paddingBottom: vs(14, h),
-    fontFamily: theme.fonts.openSansRegular,
   }),
   input: (w, h) => ({
     width: '100%',

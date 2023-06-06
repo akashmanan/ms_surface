@@ -20,6 +20,7 @@ import {
 } from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
+import {floorplanData, propertyData} from './widgets';
 import styles from './styles';
 
 const CreateInspection = () => {
@@ -35,8 +36,6 @@ const CreateInspection = () => {
     defaultTextProperty: 'Property',
     defaultTextFloorplan: 'Floorplan',
   });
-
-  let data = [{title: 'Item 1'}, {title: 'Item 2'}];
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -114,7 +113,7 @@ const CreateInspection = () => {
             bottomText={"Didn't find what you were looking for?"}
           />
           <Dropdown
-            data={data}
+            data={propertyData}
             dropdownTitle={'Property'}
             defaultText={state.defaultTextProperty}
             expanded={state.expandedProperty}
@@ -125,8 +124,9 @@ const CreateInspection = () => {
           />
 
           <Dropdown
-            data={data}
+            data={floorplanData}
             dropdownTitle={'Floorplan'}
+            bottomText={"Didn't find what you were looking for?"}
             defaultText={state.defaultTextFloorplan}
             expanded={state.expandedFloorplan}
             setExpandValue={setExpandFloorplanValue}
@@ -134,25 +134,23 @@ const CreateInspection = () => {
             style={styles.inputContainer(width, height)}
           />
           <Input
-            placeholder="Customer"
+            inputTitle={'Floorplan Unit Count'}
+            placeholder="Floorplan Unit Count"
+            keyboardType={'number-pad'}
             containerStyle={styles.inputContainer(width, height)}
             style={styles.inputBox(width, height)}
-            inputTitle={'Customer'}
-            bottomText={"Didn't find what you were looking for?"}
           />
           <Input
-            placeholder="Customer"
+            inputTitle={'List'}
+            placeholder="List"
             containerStyle={styles.inputContainer(width, height)}
             style={styles.inputBox(width, height)}
-            inputTitle={'Customer'}
-            bottomText={"Didn't find what you were looking for?"}
           />
           <Input
-            placeholder="Customer"
+            inputTitle={'Inspection Title'}
+            placeholder="Inspection Title"
             containerStyle={styles.inputContainer(width, height)}
             style={styles.inputBox(width, height)}
-            inputTitle={'Customer'}
-            bottomText={"Didn't find what you were looking for?"}
           />
 
           <Box style={styles.radioButtonContainer(width, height)}>

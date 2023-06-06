@@ -4,12 +4,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   useWindowDimensions,
-  Text,
 } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {Box} from '@components';
+import {Box, Text} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 
 const EyeIcon = ({showPassword, setShowPassword}) => {
   const {width, height} = useWindowDimensions();
@@ -20,7 +19,9 @@ const EyeIcon = ({showPassword, setShowPassword}) => {
       <SimpleLineIcons
         name="eye"
         size={ms(20, width)}
-        color={showPassword ? theme.colors.primaryButton : theme.colors.eyeIcon}
+        fontColor={
+          showPassword ? theme.colors.primaryButton : theme.colors.eyeIcon
+        }
       />
     </TouchableOpacity>
   );
@@ -43,7 +44,12 @@ const Input = props => {
   return (
     <Box style={styles.container(containerStyle)}>
       {inputTitle && (
-        <Text style={styles.inputTitle(width, height)}>{inputTitle}</Text>
+        <Text
+          fontSize={14}
+          fontColor={theme.colors.labelText}
+          style={styles.inputTitle(width, height)}>
+          {inputTitle}
+        </Text>
       )}
       <Box style={styles.inputContainer}>
         <TextInput
@@ -59,7 +65,13 @@ const Input = props => {
         )}
       </Box>
       {bottomText && (
-        <Text style={styles.bottomText(width, height, isError)}>
+        <Text
+          fontSize={12}
+          fontFamily={theme.fonts.openSansRegular}
+          fontColor={
+            isError ? theme.colors.bottomTextError : theme.colors.bottomText
+          }
+          style={styles.bottomText(width, height)}>
           {bottomText}
         </Text>
       )}
@@ -98,14 +110,9 @@ const styles = StyleSheet.create({
     borderRadius: ms(4),
   }),
   inputTitle: (w, h) => ({
-    fontSize: ms(14, w),
     paddingBottom: vs(14, h),
-    color: theme.colors.labelText,
   }),
-  bottomText: (w, h, isError) => ({
+  bottomText: (w, h) => ({
     paddingTop: vs(9, h),
-    fontSize: ms(12, w),
-    fontFamily: theme.fonts.openSansRegular,
-    color: isError ? theme.colors.bottomTextError : theme.colors.bottomText,
   }),
 });

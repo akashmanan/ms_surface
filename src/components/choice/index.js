@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text, TouchableOpacity, useWindowDimensions} from 'react-native';
+import {TouchableOpacity, useWindowDimensions} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Box} from '@components';
+import {Box, Text} from '@components';
 import {ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import styles from './styles';
@@ -46,7 +46,9 @@ const Choice = ({
         </TouchableOpacity>
         {title && (
           <TouchableOpacity onPress={setCheckboxValue}>
-            <Text style={styles.titleStyle(textStyle)}>{title}</Text>
+            <Text fontColor={theme.colors.labelText} style={textStyle}>
+              {title}
+            </Text>
           </TouchableOpacity>
         )}
       </Box>
@@ -67,7 +69,9 @@ const Choice = ({
         </TouchableOpacity>
         {title && (
           <TouchableOpacity onPress={setCheckboxValue}>
-            <Text style={styles.titleStyle(textStyle)}>{title}</Text>
+            <Text fontColor={theme.colors.labelText} style={textStyle}>
+              {title}
+            </Text>
           </TouchableOpacity>
         )}
       </Box>

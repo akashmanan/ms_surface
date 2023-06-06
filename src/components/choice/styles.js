@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {s, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 
 const styles = StyleSheet.create({
   container: (w, h) => ({
@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
     borderRadius: ms(100),
     alignSelf: 'center',
     backgroundColor: theme.colors.bottomText,
-  }),
-  titleStyle: style => ({
-    color: theme.colors.labelText,
-    ...style,
   }),
 });
 

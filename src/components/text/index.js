@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text as CustomText, useWindowDimensions} from 'react-native';
-import {theme, s, vs, ms} from '@utils';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme';
 
 const Text = ({
   children,
@@ -12,40 +13,40 @@ const Text = ({
   textDecorationLine,
   lineHeight,
   fontWeight,
-  key,
   numberOfLines,
-  textStyle,
+  fontStyle,
+  style,
 }) => {
   const {width, height} = useWindowDimensions();
-  let style = {
-    ...(fontSize ? {fontSize} : {fontSize: ms(16, width)}),
+  let styles = {
+    ...(fontSize ? {fontSize: ms(fontSize, width)} : {fontSize: ms(16, width)}),
     ...(fontColor ? {color: fontColor} : {color: theme.colors.black}),
     ...(fontFamily ? {fontFamily} : {fontFamily: theme.fonts.poppinsBold}),
-    ...(letterSpacing ? {letterSpacing} : {}),
+    ...(letterSpacing ? {letterSpacing: s(letterSpacing, width)} : {}),
     ...(textAlign ? {textAlign} : {}),
     ...(textDecorationLine ? {textDecorationLine} : {}),
-    ...(lineHeight ? {lineHeight} : {}),
+    ...(lineHeight ? {lineHeight: vs(lineHeight, height)} : {}),
     ...(fontWeight ? {fontWeight} : {}),
+    ...(fontStyle ? {fontStyle} : {}),
   };
 
   return (
-    <CustomText numberOfLines={numberOfLines} style={[style, textStyle]}>
+    <CustomText numberOfLines={numberOfLines} style={[styles, style]}>
       {children}
     </CustomText>
   );
 };
 
 const Caption = props => {
-  const {width, height} = useWindowDimensions();
   return (
     <Text
-      fontSize={props.fontSize ? props.fontSize : ms(17, width)}
+      fontSize={props.fontSize ? props.fontSize : 17}
       fontColor={props.fontColor ? props.fontColor : theme.colors.caption}
       letterSpacing={0}
       fontFamily={theme.fonts.poppinsMedium}
-      lineHeight={props.lineHeight ? props.lineHeight : vs(25, height)}
+      lineHeight={props.lineHeight ? props.lineHeight : 25}
       textAlign={props.textAlign ? props.textAlign : 'left'}
-      textStyle={props.textStyle}>
+      style={props.style}>
       {props.children}
     </Text>
   );
@@ -60,18 +61,18 @@ const HeadingText = ({
   lineHeight,
   fontWeight,
   letterSpacing,
-  textStyle,
+  style,
 }) => {
   return (
     <Text
-      fontSize={fontSize ? fontSize : ms(25)}
+      fontSize={fontSize ? fontSize : Platform.OS === 'windows' ? 31 : 26}
       fontColor={fontColor ? fontColor : theme.colors.heading}
-      letterSpacing={letterSpacing ? letterSpacing : s(0)}
+      letterSpacing={letterSpacing ? letterSpacing : 0}
       fontFamily={fontFamily ? fontFamily : theme.fonts.poppinsSemiBold}
       fontWeight={fontWeight ? fontWeight : fontWeight}
       lineHeight={lineHeight ? lineHeight : 0}
       textAlign={textAlign ? textAlign : 'left'}
-      textStyle={textStyle}>
+      style={style}>
       {children}
     </Text>
   );

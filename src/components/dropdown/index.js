@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Box, Buttons} from '@components';
+import {Box, Buttons, Text} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 
 const RenderDropdownOption = ({
   title,
@@ -39,12 +34,23 @@ const Dropdown = ({
   const {width, height} = useWindowDimensions();
   return (
     <Box style={style}>
-      <Text style={styles.dropdownTitle(width, height)}>{dropdownTitle}</Text>
+      <Text
+        fontSize={14}
+        paddingBottom={14}
+        fontColor={theme.colors.labelText}
+        style={styles.dropdownTitle(width, height)}>
+        {dropdownTitle}
+      </Text>
       <Box>
         <TouchableOpacity
           style={styles.container(width, height, style?.height)}
           onPress={setExpandValue}>
-          <Text style={styles.selectedText(width, height)}>{defaultText}</Text>
+          <Text
+            fontSize={14}
+            fontFamily={theme.fonts.latoRegular}
+            fontColor={theme.colors.dropdownSelectedText}>
+            {defaultText}
+          </Text>
           <Ionicons
             name={'caret-down'}
             color={theme.colors.dropdownSelectedText}
@@ -53,8 +59,9 @@ const Dropdown = ({
         </TouchableOpacity>
         {expanded && (
           <Box style={styles.dropdownList(width, height, style?.height)}>
-            {data?.map(item => (
+            {data?.map((item, index) => (
               <RenderDropdownOption
+                key={index}
                 title={item?.title}
                 onPressListItem={onPressListItem}
                 buttonStyle={styles.dropdownListButon}
@@ -64,7 +71,14 @@ const Dropdown = ({
           </Box>
         )}
       </Box>
-      <Text style={styles.bottomText(width, height)}>{bottomText}</Text>
+      <Text
+        fontSize={12}
+        fontStyle={'italic'}
+        fontFamily={theme.fonts.latoRegular}
+        fontColor={theme.colors.bottomText}
+        style={styles.bottomText(width, height)}>
+        {bottomText}
+      </Text>
     </Box>
   );
 };
@@ -84,11 +98,6 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.dropdownBorder,
     backgroundColor: theme.colors.white,
     zIndex: 1,
-  }),
-  selectedText: (w, h) => ({
-    fontSize: ms(14, w),
-    fontFamily: theme.fonts.latoRegular,
-    color: theme.colors.dropdownSelectedText,
   }),
   dropdownList: (w, h, style = 48) => ({
     position: 'absolute',
@@ -115,16 +124,10 @@ const styles = StyleSheet.create({
     color: theme.colors.dropdownText,
   }),
   dropdownTitle: (w, h) => ({
-    fontSize: ms(14, w),
     paddingBottom: vs(14, h),
-    color: theme.colors.labelText,
   }),
   bottomText: (w, h) => ({
     paddingTop: vs(9, h),
-    fontSize: ms(12, w),
-    fontStyle: 'italic',
-    color: '#858585',
     zIndex: -1,
-    fontFamily: theme.fonts.latoRegular,
   }),
 });

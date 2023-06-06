@@ -1,6 +1,6 @@
-import Base64 from '@utils/base64';
 import axios from 'axios';
-import Config from '../api/apiURLs';
+import Base64 from '@utils/base64';
+import Config from '@services/api/apiURLs';
 
 export const instance = axios.create({
   baseURL: Config.API_URL,

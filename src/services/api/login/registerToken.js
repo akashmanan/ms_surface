@@ -1,7 +1,8 @@
 import asyncStorage from '@thirdParty/storage';
-import Config from './../apiURLs';
-import {instance} from '../../instance';
-export default registerToken = async (accessToken, userId, userName) => {
+import {instance} from '@services/interceptors/axios';
+import Config from '@services/api/apiURLs';
+
+const registerToken = async (accessToken, userId, userName) => {
   let token = await asyncStorage.getDeviceToken('deviceToken');
   if (token) {
     let response = await instance.post(
@@ -19,3 +20,5 @@ export default registerToken = async (accessToken, userId, userName) => {
     return {};
   }
 };
+
+export default registerToken;

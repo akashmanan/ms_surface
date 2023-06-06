@@ -8,8 +8,8 @@ export const authSlice = createSlice({
     errorMsg: '',
   },
   reducers: {
-    enableLoader: state => {
-      state.isLoading = true;
+    setLoader: (state, {payload}) => {
+      state.isLoading = payload;
       state.errorMsg = '';
     },
     setUserLogin: (state, action) => {
@@ -24,6 +24,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {setUserLogin, enableLoader, setErrorMsg} = authSlice.actions;
+export const {setUserLogin, setLoader, setErrorMsg} = authSlice.actions;
 
 export default authSlice.reducer;

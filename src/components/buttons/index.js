@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-  Text,
   TouchableOpacity,
   StyleSheet,
   Pressable,
   Platform,
   useWindowDimensions,
 } from 'react-native';
-import {Box, Loader} from '@components';
+import {Box, Loader, Text} from '@components';
 import {ms} from '@thirdParty/screenSize';
-import {theme} from '@theme'
+import {theme} from '@theme';
 
 const Buttons = ({
   title,

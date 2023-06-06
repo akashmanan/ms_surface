@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
-import {Box, Buttons, Choice} from '@components';
+import {Box, Buttons, Choice, Text} from '@components';
 import {theme} from '@theme';
 import styles from '../styles';
 
