@@ -1,7 +1,6 @@
 import React from 'react';
 import {Text as CustomText, useWindowDimensions} from 'react-native';
-import {s, vs, ms} from '@thirdParty/screenSize';
-import {theme} from '@theme';
+import {theme, s, vs, ms} from '@utils';
 
 const Text = ({
   children,

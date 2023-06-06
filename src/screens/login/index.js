@@ -7,7 +7,6 @@ import {theme} from '@theme';
 import styles from './styles';
 
 const Login = () => {
-  console.log('rendered');
   const {width, height} = useWindowDimensions();
   const dispatch = useDispatch();
   const {isLoading, errorMsg} = useSelector(state => state.authReducer);
@@ -47,7 +46,7 @@ const Login = () => {
         <Image
           type="offline"
           resizeMode={'stretch'}
-          path={require('@assets/loginBanner.png')}
+          path={require('../../../assets/images/loginBanner.png')}
           style={styles.bannerImage}
         />
       </Box>
@@ -57,7 +56,7 @@ const Login = () => {
             <Image
               type="offline"
               resizeMode={'contain'}
-              path={require('@assets/facilgoIcon.png')}
+              path={require('../../../assets/images/facilgoIcon.png')}
             />
           </Box>
         )}
