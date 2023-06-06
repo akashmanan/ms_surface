@@ -1,10 +1,11 @@
 export {Box} from './box';
 export {Input} from './input';
 export {Image} from './image';
-export {Buttons} from './buttons';
 export {Loader} from './loader';
+export {Buttons} from './buttons';
+export {Heading} from './heading';
 export {Choice} from './choice';
 export {Dropdown} from './dropdown';
-export {Heading} from './heading';
-export {ImagePicker} from './imagePicker';
 export {BottomBar} from './bottomBar';
+export {ImagePicker} from './imagePicker';
+export {Text, Caption, HeadingText} from './text';

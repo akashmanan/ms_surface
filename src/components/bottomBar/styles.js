@@ -1,9 +1,10 @@
+
 import {StyleSheet, Platform} from 'react-native';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {vs} from '@thirdParty/screenSize';
 import {theme} from '@theme'
 
 const styles = StyleSheet.create({
-  container: (w, h) => ({
+  container: (w, h, style) => ({
     width: '100%',
     height: vs(85, h),
     flexDirection: 'row',
@@ -15,17 +16,12 @@ const styles = StyleSheet.create({
     elevation: 10,
     paddingHorizontal: '5%',
     backgroundColor: theme.colors.white,
-  }),
-  button: (w, h, backgroundColor) => ({
-    width: Platform.OS === 'windows' ? s(179, w) : s(149, w),
-    height: vs(40, h),
-    backgroundColor,
-  }),
-  buttonText: (w, h, color) => ({
-    fontSize: ms(16, w),
-    fontFamily: theme.fonts.latoRegular,
-    color,
+    borderWidth: 1,
+    borderColor: theme.colors.bottomBarBorder,
+    ...style,
   }),
 });
 
 export default styles;
+
+

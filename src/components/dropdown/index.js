@@ -10,11 +10,16 @@ import {Box, Buttons} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme'
 
-const RenderDropdownOption = ({title, onPress, buttonStyle, textStyle}) => {
+const RenderDropdownOption = ({
+  title,
+  onPressListItem,
+  buttonStyle,
+  textStyle,
+}) => {
   return (
     <Buttons
       title={title}
-      onPress={onPress}
+      onPress={() => onPressListItem(title)}
       buttonStyle={buttonStyle}
       buttonTextStyle={textStyle}
     />
@@ -22,12 +27,14 @@ const RenderDropdownOption = ({title, onPress, buttonStyle, textStyle}) => {
 };
 
 const Dropdown = ({
+  data,
   expanded,
   setExpandValue,
   style,
   dropdownTitle,
   bottomText,
   defaultText,
+  onPressListItem,
 }) => {
   const {width, height} = useWindowDimensions();
   return (
@@ -40,34 +47,24 @@ const Dropdown = ({
           <Text style={styles.selectedText(width, height)}>{defaultText}</Text>
           <Ionicons
             name={'caret-down'}
-            color={'#555555'}
+            color={theme.colors.dropdownSelectedText}
             size={ms(18, height)}
           />
         </TouchableOpacity>
         {expanded && (
           <Box style={styles.dropdownList(width, height, style?.height)}>
-            <RenderDropdownOption
-              title={'Dropdown'}
-              // onPress={ }
-              buttonStyle={styles.dropdownListButon}
-              textStyle={styles.dropdownListText(width, height)}
-            />
-            <RenderDropdownOption
-              title={'Dropdown'}
-              // onPress={ }
-              buttonStyle={styles.dropdownListButon}
-              textStyle={styles.dropdownListText(width, height)}
-            />
-            <RenderDropdownOption
-              title={'Dropdown'}
-              // onPress={ }
-              buttonStyle={styles.dropdownListButon}
-              textStyle={styles.dropdownListText(width, height)}
-            />
+            {data?.map(item => (
+              <RenderDropdownOption
+                title={item?.title}
+                onPressListItem={onPressListItem}
+                buttonStyle={styles.dropdownListButon}
+                textStyle={styles.dropdownListText(width, height)}
+              />
+            ))}
           </Box>
         )}
       </Box>
-      <Text style={styles.bottomText(width, height)}>{'bottomText'}</Text>
+      <Text style={styles.bottomText(width, height)}>{bottomText}</Text>
     </Box>
   );
 };
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
     paddingVertical: vs(10, h),
     borderColor: theme.colors.dropdownBorder,
     backgroundColor: theme.colors.white,
-    zIndex: -1,
+    zIndex: 1,
   }),
   selectedText: (w, h) => ({
     fontSize: ms(14, w),
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     width: '100%',
     rowGap: 18,
     elevation: 10,
-    zIndex: 10000,
+    zIndex: 1,
     borderWidth: 1,
     borderColor: theme.colors.dropdownBorder,
     borderBottomLeftRadius: 7,
@@ -111,7 +108,6 @@ const styles = StyleSheet.create({
   dropdownListButon: {
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    // backgroundColor: 'red',
   },
   dropdownListText: (w, h) => ({
     fontSize: ms(12, w),

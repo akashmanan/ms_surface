@@ -5,7 +5,6 @@ import {theme} from '@theme';
 import styles from '../styles';
 
 const HeaderTitle = ({title, dimensions: {width, height}, style}) => {
-  console.log('dimensions', width, height);
   return (
     <Box style={style}>
       <Buttons
@@ -53,6 +52,7 @@ const RenderList = ({
   item: {id, inspectionName, status, dueDate},
   width,
   height,
+  onSelectInspections,
 }) => {
   const [state, setState] = useState({
     isChecked: false,
@@ -62,8 +62,9 @@ const RenderList = ({
   let statusText = theme.colors.black;
   let property = inspectionName?.split(',')?.[1];
 
-  let setCheckboxValue = () => {
+  let setCheckboxValue = inspectionId => {
     setState(prev => ({...prev, isChecked: !state.isChecked}));
+    onSelectInspections(inspectionId);
   };
 
   if (status === 'InProgress') {
@@ -84,7 +85,7 @@ const RenderList = ({
           bordered
           variant={'checkbox'}
           isChecked={state.isChecked}
-          setCheckboxValue={setCheckboxValue}
+          setCheckboxValue={() => setCheckboxValue(id)}
         />
         <Text style={styles.tableText(width, height)}>{id || ''}</Text>
       </Box>
@@ -118,4 +119,12 @@ const RenderList = ({
   );
 };
 
-export {RenderListHeader, RenderList};
+const RenderEmptyList = ({width, height}) => {
+  return (
+    <Box style={styles.listEmptyContainer(width, height)}>
+      <Text style={styles.tableText(width, height)}>{'No Records Found'}</Text>
+    </Box>
+  );
+};
+
+export {RenderListHeader, RenderList, RenderEmptyList};
