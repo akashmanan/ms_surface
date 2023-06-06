@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, useWindowDimensions, ScrollView} from 'react-native';
-import {Box, Heading, BottomBar, Buttons} from '@components';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {inspectionListing} from '@services/api';
-import {theme} from '@utils';
+import {Box, Heading, BottomBar, Buttons} from '@components';
+import {theme} from '@theme';
 import {RenderListHeader, RenderList, RenderEmptyList} from './widgets';
 import styles from './styles';
 

@@ -18,7 +18,8 @@ import {
   Heading,
   ImagePicker,
 } from '@components';
-import {theme, s, vs, ms} from '@utils';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme';
 import styles from './styles';
 
 const CreateInspection = () => {

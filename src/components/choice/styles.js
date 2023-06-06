@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {theme, s, ms} from '@utils';
+import {s, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 
 const styles = StyleSheet.create({
   container: (w, h) => ({

@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Box, Buttons} from '@components';
-import {theme, s, vs, ms} from '@utils';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 
 const RenderDropdownOption = ({
   title,
