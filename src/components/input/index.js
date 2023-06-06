@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {Box} from '@components';
-import {theme, s, vs, ms} from '@utils';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 
 const EyeIcon = ({showPassword, setShowPassword}) => {
   const {width, height} = useWindowDimensions();

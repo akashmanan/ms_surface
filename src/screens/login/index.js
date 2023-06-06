@@ -3,7 +3,7 @@ import {Text, Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Image, Input, Checkbox, Box} from '@components';
 import {login} from '@services/api';
-import {theme} from '@utils';
+import {theme} from '@theme';
 import styles from './styles';
 
 const Login = () => {

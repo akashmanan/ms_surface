@@ -2,7 +2,8 @@ import React from 'react';
 import {Text, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Box} from '@components';
-import {theme, ms} from '@utils';
+import {ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 import styles from './styles';
 
 const Checkbox = ({

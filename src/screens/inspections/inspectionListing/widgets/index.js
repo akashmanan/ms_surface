@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text} from 'react-native';
 import {Box, Button, Checkbox} from '@components';
-import {theme} from '@utils';
+import {theme} from '@theme';
 import styles from '../styles';
 
 const HeaderTitle = ({title, dimensions: {width, height}, style}) => {

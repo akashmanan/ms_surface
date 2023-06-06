@@ -19,7 +19,8 @@ import {
   ImagePicker,
   BottomButtonBar,
 } from '@components';
-import {theme, s, vs, ms} from '@utils';
+import {s, vs, ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 
 const CreateInspection = () => {
   const {width, height} = useWindowDimensions();

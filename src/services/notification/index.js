@@ -1,5 +1,5 @@
 // import PushNotification from 'react-native-push-notification'
-import asyncStorage from '@utils/asyncStorage';
+import asyncStorage from '@thirdParty/storage';
 
 let configured = false;
 

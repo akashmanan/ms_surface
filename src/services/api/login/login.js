@@ -1,13 +1,13 @@
-import {instance} from '../../instance';
+import {instance} from '../../interceptors/axios';
 import humps from 'humps';
-import storage from '@utils/asyncStorage';
+import storage from '@thirdParty/storage';
 import {
   setUserLogin,
   enableLoader,
   setErrorMsg,
 } from '../../../redux/slice/authSlice';
-import Config from '@utils/apiURLs';
-import SetCookies from '@utils/setCookie';
+import Config from './../apiURLs';
+import SetCookies from '@thirdParty/cookies';
 import inspectionListing from '../inspectionListing/index';
 
 export default login = async (username, password, dispatch) => {

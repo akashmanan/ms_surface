@@ -7,7 +7,8 @@ import {
   Platform,
   useWindowDimensions,
 } from 'react-native';
-import {theme, ms} from '@utils';
+import {ms} from '@thirdParty/screenSize';
+import {theme} from '@theme'
 import {Box, Loader} from '@components';
 
 const Button = ({

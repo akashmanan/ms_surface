@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, useWindowDimensions} from 'react-native';
 import {Button} from '@components';
-import {theme} from '@utils';
+import {theme} from '@theme';
 import styles from './styles';
 
 const BottomButtonBar = ({primaryButton, outlineButton, cancelButton}) => {
