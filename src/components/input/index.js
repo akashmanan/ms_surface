@@ -37,7 +37,6 @@ const Input = props => {
     inputTitle,
     showPassword,
     containerStyle,
-    bottomTextStyle,
     setShowPassword,
   } = props;
 

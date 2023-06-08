@@ -1,3 +1,3 @@
 export {Login} from './login';
-export {InspectionListing} from './inspections/inspectionListing';
+export {InspectionListing} from './inspections/list';
 export {CreateInspection} from './inspections/create';

@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   container: (w, h) => ({
     flex: 1,
     backgroundColor: theme.colors.white,
+    marginBottom: vs(85, h),
   }),
   contentContainer: (w, h) => ({
     paddingHorizontal: Platform.OS === 'windows' ? s(64, w) : s(20, w),
@@ -67,6 +68,12 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.latoRegular,
   }),
   bottomBar: () => ({backgroundColor: 'red'}),
+  camera: (w, h) => ({
+    width: s(800, w),
+    height: vs(550, h),
+    alignSelf: 'center',
+    borderRadius: 10,
+  }),
 });
 
 export default styles;

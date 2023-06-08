@@ -6,6 +6,12 @@
 // Includes from @react-native-community/async-storage
 #include <winrt/ReactNativeAsyncStorage.h>
 
+// Includes from react-native-camera
+#include <winrt/ReactNativeCameraCPP.h>
+
+// Includes from react-native-permissions
+#include <winrt/RNPermissions.h>
+
 // Includes from react-native-screens
 #include <winrt/RNScreens.h>
 
@@ -16,6 +22,10 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
 { 
     // IReactPackageProviders from @react-native-community/async-storage
     packageProviders.Append(winrt::ReactNativeAsyncStorage::ReactPackageProvider());
+    // IReactPackageProviders from react-native-camera
+    packageProviders.Append(winrt::ReactNativeCameraCPP::ReactPackageProvider());
+    // IReactPackageProviders from react-native-permissions
+    packageProviders.Append(winrt::RNPermissions::ReactPackageProvider());
     // IReactPackageProviders from react-native-screens
     packageProviders.Append(winrt::RNScreens::ReactPackageProvider());
 }

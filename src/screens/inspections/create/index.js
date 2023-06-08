@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   Keyboard,
   ScrollView,
   TouchableOpacity,
@@ -17,11 +18,14 @@ import {
   BottomBar,
   Heading,
   ImagePicker,
+  Modal,
+  Camera,
 } from '@components';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {vs} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import {floorplanData, propertyData} from './widgets';
 import styles from './styles';
+import {check, PERMISSIONS} from 'react-native-permissions';
 
 const CreateInspection = () => {
   const {width, height} = useWindowDimensions();
@@ -36,6 +40,8 @@ const CreateInspection = () => {
     defaultTextProperty: 'Property',
     defaultTextFloorplan: 'Floorplan',
   });
+
+  const [popup, setPopup] = React.useState(false);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -97,8 +103,43 @@ const CreateInspection = () => {
     ImagePicker({type, success: getImage});
   };
 
+  const openCamera = async () => {
+    setPopup(true);
+  };
+
+  const takePicture = async camera => {
+    check(PERMISSIONS.WINDOWS.WEBCAM)
+      .then(async result => {
+        if (camera.current) {
+          const options = {quality: 0.5, base64: true};
+          const data = await camera.current.takePictureAsync(options);
+          state.image.push(data.uri);
+        }
+      })
+      .catch(error => console.log(error));
+  };
+
+  const onCloseCamera = () => {
+    setPopup(false);
+  };
+
+  let renderCamera = () => {
+    return (
+      <Camera
+        takePicture={cameraRef => {
+          takePicture(cameraRef);
+        }}
+        style={styles.camera(width, height)}
+        onCloseCamera={onCloseCamera}
+      />
+    );
+  };
+
   return (
     <>
+      <Modal isVisible={popup} onClose={onCloseCamera}>
+        {renderCamera()}
+      </Modal>
       <ScrollView
         style={styles.container(width, height)}
         contentContainerStyle={styles.contentContainer(width, height)}
@@ -178,7 +219,8 @@ const CreateInspection = () => {
           </Box>
           <Box style={styles.imagePickerContainer(width, height)}>
             <Box style={styles.imagePickerIconContainer}>
-              <TouchableOpacity onPress={() => selectImage('camera')}>
+              {/* <TouchableOpacity onPress={() => selectImage('camera')}> */}
+              <TouchableOpacity onPress={() => openCamera()}>
                 <Feather
                   style={styles.itemIcon}
                   color={theme.colors.bottomText}
@@ -186,7 +228,8 @@ const CreateInspection = () => {
                   size={vs(30, height)}
                 />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => selectImage('gallery')}>
+              {/* <TouchableOpacity onPress={() => selectImage('gallery')}> */}
+              <TouchableOpacity onPress={() => openCamera()}>
                 <FontAwesome
                   style={styles.itemIcon}
                   color={theme.colors.bottomText}
@@ -211,7 +254,6 @@ const CreateInspection = () => {
           </Box>
         </Box>
       </ScrollView>
-
       {!state.isKeyboardOpened && (
         <BottomBar style={styles.bottomBar}>
           <Buttons

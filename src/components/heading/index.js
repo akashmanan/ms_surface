@@ -1,7 +1,6 @@
 import React from 'react';
 import {useWindowDimensions} from 'react-native';
 import {Box, Buttons, HeadingText} from '@components';
-import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import styles from './styles';
 

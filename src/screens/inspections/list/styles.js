@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     backgroundColor: theme.colors.white,
+    zIndex: -1,
   },
   listHeader: (w, h) => ({
     width: '100%',
@@ -86,6 +87,9 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.latoRegular,
   }),
   bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(30, w)}),
+  inputContainer: (w, h, width) => ({
+    width: Platform.OS === 'windows' ? width : '100%',
+  }),
 });
 
 export default styles;

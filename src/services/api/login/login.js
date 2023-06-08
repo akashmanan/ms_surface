@@ -19,7 +19,7 @@ const login = async (username, password, dispatch) => {
       }),
     )
     .then(async res => {
-      if (res?.status == 200) {
+      if (res?.status === 200) {
         let session = humps.camelizeKeys(res?.data);
         inspectionListing(1, dispatch);
         // if (res?.headers?.['set-cookie']) {

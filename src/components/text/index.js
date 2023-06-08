@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text as CustomText, useWindowDimensions} from 'react-native';
+import {Text as CustomText, Platform, useWindowDimensions} from 'react-native';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
