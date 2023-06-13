@@ -219,7 +219,6 @@ const CreateInspection = () => {
           </Box>
           <Box style={styles.imagePickerContainer(width, height)}>
             <Box style={styles.imagePickerIconContainer}>
-              {/* <TouchableOpacity onPress={() => selectImage('camera')}> */}
               <TouchableOpacity onPress={() => openCamera()}>
                 <Feather
                   style={styles.itemIcon}
@@ -228,7 +227,6 @@ const CreateInspection = () => {
                   size={vs(30, height)}
                 />
               </TouchableOpacity>
-              {/* <TouchableOpacity onPress={() => selectImage('gallery')}> */}
               <TouchableOpacity onPress={() => openCamera()}>
                 <FontAwesome
                   style={styles.itemIcon}
