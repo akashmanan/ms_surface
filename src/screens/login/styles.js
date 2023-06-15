@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     width: '104%',
-    height: Platform.OS === 'windows' ? '110%' : vs(244),
+    height: '100%',
   },
   loginForm: (w, h) => ({
-    height: Platform.OS === 'windows' ? '70%' : vs(611),
+    height: '72%',
     width: Platform.OS === 'windows' ? '65%' : '80%',
     alignSelf: 'center',
     position: 'absolute',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   loginFormContainer: (w, h) => ({
     width: Platform.OS === 'windows' ? '60%' : '100%',
     height: vs(611, h),
-    paddingHorizontal: Platform.OS === 'windows' ? s(50, w) : s(30, w),
+    paddingHorizontal: '6%',
     paddingVertical: vs(20, h),
   }),
   heading: (w, h) => ({

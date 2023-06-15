@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     marginBottom: vs(85, h),
   }),
   contentContainer: (w, h) => ({
-    paddingHorizontal: Platform.OS === 'windows' ? s(64, w) : s(20, w),
+    paddingHorizontal: '5%',
   }),
   inspectionFormContainer: {
     rowGap: 20,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.dropdownBorder,
   }),
   radioButtonContainer: (w, h) => ({
-    width: Platform.OS === 'windows' ? '100%' : '100%',
+    width: '100%',
     flexDirection: 'row',
     columnGap: s(10, h),
   }),
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   button: (w, h) => ({
-    width: Platform.OS === 'windows' ? s(179, w) : s(149, w),
+    width: s(160, w),
     height: vs(40, h),
   }),
   buttonText: (w, h) => ({

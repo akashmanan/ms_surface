@@ -1,6 +1,12 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, useWindowDimensions} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import {Flyout} from 'react-native-windows';
+import RNModal from 'react-native-modal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Box} from '@components';
 import {theme} from '@theme';
@@ -8,35 +14,58 @@ import {s, vs, ms} from '@thirdParty/screenSize';
 
 const Modal = ({isVisible, children, onClose}) => {
   const {width, height} = useWindowDimensions();
-  return (
-    <Flyout
-      isOpen={isVisible}
-      onDismiss={onClose}
-      isOverlayEnabled={false}
-      style={styles.modalContainer(width, height)}
-      isLightDismissEnabled={true}>
-      <Box style={styles.modalContainer(width, height)}>
-        <TouchableOpacity
-          onPress={onClose}
-          style={styles.closeBtn(width, height)}>
-          <Ionicons
-            name="close"
-            color={theme.colors.black}
-            size={ms(30, width)}
-          />
-        </TouchableOpacity>
-        {children}
-      </Box>
-    </Flyout>
-  );
+
+  if (Platform.OS === 'windows') {
+    return (
+      <Flyout
+        isOpen={isVisible}
+        onDismiss={onClose}
+        isOverlayEnabled={false}
+        style={styles.modalContainer(width, height)}
+        isLightDismissEnabled={true}>
+        <Box style={styles.modalContainer(width, height)}>
+          <TouchableOpacity
+            onPress={onClose}
+            style={styles.closeBtn(width, height)}>
+            <Ionicons
+              name="close"
+              color={theme.colors.black}
+              size={ms(30, width)}
+            />
+          </TouchableOpacity>
+          {children}
+        </Box>
+      </Flyout>
+    );
+  } else {
+    return (
+      <RNModal
+        isVisible={isVisible}
+        onClose={onClose}
+        style={styles.modalContainer(width, height)}>
+        <Box style={styles.modalContainer(width, height)}>
+          <TouchableOpacity
+            onPress={onClose}
+            style={styles.closeBtn(width, height)}>
+            <Ionicons
+              name="close"
+              color={theme.colors.black}
+              size={ms(30, width)}
+            />
+          </TouchableOpacity>
+          {children}
+        </Box>
+      </RNModal>
+    );
+  }
 };
 
 export {Modal};
 
 const styles = StyleSheet.create({
   modalContainer: (w, h) => ({
-    width: s(900, w),
-    height: vs(600, h),
+    width: '100%',
+    height: '100%',
     borderWidth: s(1, w),
     borderRadius: ms(10, w),
     justifyContent: 'center',

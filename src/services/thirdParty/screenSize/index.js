@@ -17,6 +17,7 @@ const guidelineBaseWidth =
   Platform.OS === 'windows'
     ? SIZE_MATTERS_BASE_WIDTH_WINDOWS
     : SIZE_MATTERS_BASE_WIDTH;
+
 const guidelineBaseHeight =
   Platform.OS === 'windows'
     ? SIZE_MATTERS_BASE_HEIGHT_WINDOWS

@@ -1,4 +1,4 @@
-import {Platform, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: (w, h) => ({
     flex: 1,
     backgroundColor: theme.colors.white,
-    paddingLeft: Platform.OS === 'windows' ? s(64, w) : s(20, w),
+    paddingLeft: '5%',
   }),
   headerTitle: (w, h, width) => ({
     width: width,
@@ -79,17 +79,14 @@ const styles = StyleSheet.create({
     paddingVertical: vs(pv, h),
   }),
   button: (w, h) => ({
-    width: Platform.OS === 'windows' ? s(179, w) : s(149, w),
+    width: s(160, w),
     height: vs(40, h),
   }),
   buttonText: (w, h) => ({
     fontSize: ms(16, w),
     fontFamily: theme.fonts.latoRegular,
   }),
-  bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(30, w)}),
-  inputContainer: (w, h, width) => ({
-    width: Platform.OS === 'windows' ? width : '100%',
-  }),
+  bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(20, w)}),
 });
 
 export default styles;

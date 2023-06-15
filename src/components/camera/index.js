@@ -13,7 +13,7 @@ import {theme} from '@theme';
 
 const Camera = ({style, takePicture}) => {
   const {width, height} = useWindowDimensions();
-  let camera = React.useRef();
+  const camera = React.useRef(null);
 
   const androidPermission = {
     title: 'Permission to use camera',
@@ -30,12 +30,12 @@ const Camera = ({style, takePicture}) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <RNCamera
         ref={ref => {
           camera.current = ref;
         }}
-        style={style}
+        style={styles.camera}
         type={RNCamera.Constants.Type.back}
         flashMode={RNCamera.Constants.FlashMode.on}
         androidCameraPermissionOptions={androidPermission}
@@ -61,6 +61,7 @@ const Camera = ({style, takePicture}) => {
 export {Camera};
 
 const styles = StyleSheet.create({
+  container: {width: '100%', height: '100%'},
   captureButton: (w, h) => ({
     borderColor: theme.colors.white,
     borderWidth: s(3, w),
@@ -72,4 +73,8 @@ const styles = StyleSheet.create({
   innerCaptureButton: w => ({
     padding: ms(4, w),
   }),
+  camera: {
+    width: '100%',
+    height: '100%',
+  },
 });

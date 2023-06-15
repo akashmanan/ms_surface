@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Alert,
   Keyboard,
   ScrollView,
   TouchableOpacity,
@@ -17,7 +16,6 @@ import {
   Dropdown,
   BottomBar,
   Heading,
-  ImagePicker,
   Modal,
   Camera,
 } from '@components';
@@ -40,8 +38,6 @@ const CreateInspection = () => {
     defaultTextProperty: 'Property',
     defaultTextFloorplan: 'Floorplan',
   });
-
-  const [popup, setPopup] = React.useState(false);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
@@ -92,19 +88,8 @@ const CreateInspection = () => {
     setState(prev => ({...prev, isChecked: !state.isChecked}));
   };
 
-  const getImage = image => {
-    setState(prev => ({
-      ...prev,
-      image: [...state.image, image?.assets[0]?.uri],
-    }));
-  };
-
-  const selectImage = type => {
-    ImagePicker({type, success: getImage});
-  };
-
   const openCamera = async () => {
-    setPopup(true);
+    setState(prev => ({...prev, popup: true}));
   };
 
   const takePicture = async camera => {
@@ -113,32 +98,28 @@ const CreateInspection = () => {
         if (camera.current) {
           const options = {quality: 0.5, base64: true};
           const data = await camera.current.takePictureAsync(options);
-          state.image.push(data.uri);
+          setState(prev => ({...prev, image: [...state.image, data.uri]}));
         }
       })
       .catch(error => console.log(error));
   };
 
   const onCloseCamera = () => {
-    setPopup(false);
-  };
-
-  let renderCamera = () => {
-    return (
-      <Camera
-        takePicture={cameraRef => {
-          takePicture(cameraRef);
-        }}
-        style={styles.camera(width, height)}
-        onCloseCamera={onCloseCamera}
-      />
-    );
+    setState(prev => ({...prev, popup: false}));
   };
 
   return (
     <>
-      <Modal isVisible={popup} onClose={onCloseCamera}>
-        {renderCamera()}
+      <Modal isVisible={state.popup} onClose={onCloseCamera}>
+        {state.popup && (
+          <Camera
+            takePicture={cameraRef => {
+              takePicture(cameraRef);
+            }}
+            style={styles.camera(width, height)}
+            onCloseCamera={onCloseCamera}
+          />
+        )}
       </Modal>
       <ScrollView
         style={styles.container(width, height)}
