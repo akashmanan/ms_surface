@@ -8,7 +8,7 @@ import {
 import {RNCamera} from 'react-native-camera';
 import {Box} from '@components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
 const Camera = ({style, takePicture}) => {
@@ -63,9 +63,6 @@ export {Camera};
 const styles = StyleSheet.create({
   container: {width: '100%', height: '100%'},
   captureButton: (w, h) => ({
-    borderColor: theme.colors.white,
-    borderWidth: s(3, w),
-    borderRadius: 100,
     position: 'absolute',
     top: vs(-60, w),
     alignSelf: 'center',

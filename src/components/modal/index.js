@@ -75,8 +75,12 @@ const styles = StyleSheet.create({
   }),
   closeBtn: (w, h) => ({
     position: 'absolute',
-    top: vs(10, w),
-    right: s(10, w),
+    top: vs(14, w),
+    right: s(20, w),
     zIndex: 999,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.colors.white,
   }),
 });
