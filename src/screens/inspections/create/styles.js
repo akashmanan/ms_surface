@@ -3,11 +3,6 @@ import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
 const styles = StyleSheet.create({
-  container: (w, h) => ({
-    flex: 1,
-    backgroundColor: theme.colors.white,
-    marginBottom: vs(85, h),
-  }),
   contentContainer: (w, h) => ({
     paddingHorizontal: '5%',
   }),

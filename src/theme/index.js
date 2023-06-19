@@ -57,12 +57,20 @@ const colors = {
   inProgressText: '#1155B6',
   resolvedBg: '#E3FCEF',
   resolvedText: '#006644',
-  openBg: '#5C6982',
-  openText: '#EBECF0',
+  openBg: '#EBECF0',
+  openText: '#5C6982',
+  completedBg: '#E3FCEF',
+  completedText: '#006644',
   outlineButtonDisabled: '#99c4f1',
   bottomBarBorder: 'rgba(0,0,0,0.1)',
   tableBorder: '#EEEEEE',
   caption: 'rgba(27, 43, 65, 0.72)',
+  progressBar: 'rgba(26, 56, 96, 0.1)',
+  locationIcon: '#B4B4B4',
+  locationText: '#52575C',
+  tabBg: 'rgba(233, 236, 240, 0.34)',
+  defaultStatusBg: '#D3D3D3',
+  tabBarItem: '#848484',
 };
 
 const theme = {

@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {Buttons, Image, Input, Choice, Box, Text} from '@components';
 import {login} from '@services/api';
+import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import styles from './styles';
 
@@ -91,7 +93,7 @@ const Login = () => {
             Password
           </Text>
           <Input
-            icon={true}
+            icon={'password'}
             placeholder="Password"
             placeholderTextColor={theme.colors.inputPlaceholder}
             secureTextEntry={!state.showPassword}
@@ -105,6 +107,7 @@ const Login = () => {
           <Box style={styles.bottomText(width, height)}>
             <Box style={styles.rememberView(width, height)}>
               <Choice
+                rounded
                 variant={'checkbox'}
                 title={'Remember me?'}
                 isChecked={state.isChecked}

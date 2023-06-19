@@ -9,5 +9,6 @@ export {Buttons} from './buttons';
 export {Heading} from './heading';
 export {Dropdown} from './dropdown';
 export {BottomBar} from './bottomBar';
+export {TopTabBar} from './topTabBar';
 export {ImagePicker} from './imagePicker';
 export {Text, Caption, HeadingText} from './text';

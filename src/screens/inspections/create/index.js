@@ -24,9 +24,12 @@ import {theme} from '@theme';
 import {floorplanData, propertyData} from './widgets';
 import styles from './styles';
 import {check, PERMISSIONS} from 'react-native-permissions';
+import commonStyles from '../commonStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const CreateInspection = () => {
   const {width, height} = useWindowDimensions();
+  const navigation = useNavigation();
   const [state, setState] = useState({
     image: [],
     type: null,
@@ -122,7 +125,7 @@ const CreateInspection = () => {
         )}
       </Modal>
       <ScrollView
-        style={styles.container(width, height)}
+        style={commonStyles.container(width, height)}
         contentContainerStyle={styles.contentContainer(width, height)}
         keyboardShouldPersistTaps={'handled'}>
         <Heading heading={'Create Inspection'} />
@@ -245,7 +248,9 @@ const CreateInspection = () => {
           <Buttons
             title={'Create'}
             variant={'primary'}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('InspectionDetails');
+            }}
             buttonStyle={styles.button(width, height)}
             buttonTextStyle={styles.buttonText(width, height)}
           />

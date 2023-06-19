@@ -1,6 +1,11 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Login, InspectionListing, CreateInspection} from '@screens';
+import {
+  Login,
+  InspectionListing,
+  CreateInspection,
+  InspectionDetails,
+} from '@screens';
 import {useSelector} from 'react-redux';
 
 const Stack = createStackNavigator();
@@ -18,6 +23,10 @@ const Navigation = () => {
             component={InspectionListing}
           />
           <Stack.Screen name="CreateInspection" component={CreateInspection} />
+          <Stack.Screen
+            name="InspectionDetails"
+            component={InspectionDetails}
+          />
         </Stack.Group>
       )}
     </Stack.Navigator>

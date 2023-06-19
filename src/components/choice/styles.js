@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     zIndex: -1,
   }),
   buttonStyle: (w, h, style) => ({
-    width: ms(18, w),
-    height: ms(18, w),
+    width: ms(16, w),
+    height: ms(16, w),
     justifyContent: 'center',
     alignItems: 'center',
     ...style,

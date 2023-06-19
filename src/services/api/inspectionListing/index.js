@@ -8,11 +8,7 @@ const inspectionListing = async (page, dispatch) => {
   let state = store.getState();
   let token = state.authReducer.accessToken;
   await instance
-    .get(
-      `${Config.INSPECTION_LISTING}?token=${encodeURIComponent(
-        token,
-      )}&page=${page}`,
-    )
+    .get(`${Config.INSPECTION_LISTING}?token=${encodeURIComponent(token)}`)
     .then(async response => {
       if (response && response.data) {
         let inspections = humps.camelizeKeys(response.data);

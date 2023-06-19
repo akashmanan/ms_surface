@@ -3,10 +3,44 @@ import {FlatList, useWindowDimensions, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {inspectionListing} from '@services/api';
-import {Box, Heading, BottomBar, Buttons} from '@components';
+import {
+  Box,
+  Heading,
+  BottomBar,
+  Buttons,
+  Dropdown,
+  Input,
+  TopTabBar,
+} from '@components';
 import {theme} from '@theme';
 import {RenderListHeader, RenderList, RenderEmptyList} from './widgets';
+import {s, vs, ms} from '@thirdParty/screenSize';
 import styles from './styles';
+
+const status = [
+  {title: 'In progress'},
+  {title: 'Completed'},
+  {title: 'Cancelled'},
+];
+
+const propertyData = [
+  {title: '0N611 Gray Ave Wheaton, IL 60187'},
+  {title: '1 Berry Ct Lake SaintLouis, MO 63367'},
+  {title: '1 Sweetwater Pkwy Powder Springs, GA 30127'},
+  {title: '10 Gentry Drive Cartersville, GA 30120'},
+  {title: '10 Lloyd St Cary, IL 60013'},
+];
+
+const customerData = [
+  {title: 'AMLI'},
+  {title: 'Ziegler'},
+  {title: 'Kairos Living'},
+  {title: 'Avenue Living'},
+  {title: 'Davlyn'},
+  {title: 'FirstKey Homes'},
+  {title: 'Edward Rose'},
+  {title: 'Williams MGMT'},
+];
 
 const InspectionListing = () => {
   const {width, height} = useWindowDimensions();
@@ -15,12 +49,26 @@ const InspectionListing = () => {
   const {inspectionList} = useSelector(state => state.inspectionListReducer);
 
   const [state, setState] = useState({
+    inspectionData: inspectionList,
+    defaultStatus: 'Status',
+    defaultProperty: 'Property',
+    defaultCustomer: 'Customer',
+    expandedStatus: false,
+    expandedProperty: false,
+    expandedCustomer: false,
+    selectedStatus: [],
+    selectedProperty: [],
+    selectedCustomer: [],
     selectedItems: [],
   });
 
   useEffect(() => {
     inspectionListing(1, dispatch);
   }, []);
+
+  useEffect(() => {
+    setState(prev => ({...prev, inspectionData: inspectionList}));
+  }, [inspectionList]);
 
   const onCreateInspection = () => {
     navigaiton.navigate('CreateInspection');
@@ -42,6 +90,36 @@ const InspectionListing = () => {
     }
   };
 
+  const setExpandValue = item => {
+    setState(prev => ({...prev, [item]: !state[item]}));
+  };
+
+  const onPressStatus = (selectedValue, item) => {
+    let filteredData;
+    if (!state[item]?.includes(selectedValue)) {
+      setState(prev => ({
+        ...prev,
+        [item]: [...state[item], selectedValue],
+      }));
+    } else {
+      filteredData = state[item]?.filter(item => item !== selectedValue);
+      setState(prev => ({
+        ...prev,
+        [item]: filteredData,
+      }));
+    }
+  };
+
+  const onSearchInspection = text => {
+    let filteredData = inspectionList.filter(item => {
+      if (!text) {
+        return inspectionList;
+      }
+      return String(item.id)?.includes(text) || null;
+    });
+    setState(prev => ({...prev, inspectionData: filteredData}));
+  };
+
   let isCreateQuoteDisable =
     state.selectedItems?.length === 0 || state.selectedItems?.length > 1
       ? true
@@ -52,15 +130,63 @@ const InspectionListing = () => {
 
   return (
     <>
+      <TopTabBar />
       <Box style={styles.container(width, height)}>
         <Heading
           heading={'Inspection'}
           buttonTitle={'Create Inspection'}
           onPress={onCreateInspection}
         />
+        <Box style={{flexDirection: 'row', columnGap: s(12, width)}}>
+          <Input
+            icon={'search'}
+            onChangeText={onSearchInspection}
+            placeholder="Inspection#/Account#/ title"
+            containerStyle={styles.dropdownContainer('24%')}
+          />
+
+          <Dropdown
+            input
+            checkbox
+            placeholder={'Find Customer'}
+            data={customerData}
+            selectedData={state.selectedCustomer}
+            expanded={state.expandedCustomer}
+            defaultText={state.defaultCustomer}
+            style={styles.dropdownContainer('16%')}
+            onPressListItem={item => onPressStatus(item, 'selectedCustomer')}
+            setExpandValue={() => setExpandValue('expandedCustomer')}
+          />
+
+          <Dropdown
+            input
+            checkbox
+            placeholder={'Find Property...'}
+            data={propertyData}
+            selectedData={state.selectedProperty}
+            onPressListItem={item => onPressStatus(item, 'selectedProperty')}
+            expanded={state.expandedProperty}
+            defaultText={state.defaultProperty}
+            style={styles.dropdownContainer('16%')}
+            setExpandValue={() => setExpandValue('expandedProperty')}
+          />
+
+          <Dropdown
+            checkbox
+            status
+            data={status}
+            selectedData={state.selectedStatus}
+            onPressListItem={item => onPressStatus(item, 'selectedStatus')}
+            expanded={state.expandedStatus}
+            defaultText={state.defaultStatus}
+            style={styles.dropdownContainer('16%')}
+            setExpandValue={() => setExpandValue('expandedStatus')}
+          />
+        </Box>
         <ScrollView style={styles.list} horizontal>
           <FlatList
-            data={inspectionList}
+            data={state.inspectionData}
+            extraData={state.inspectionData}
             ListHeaderComponent={props => (
               <RenderListHeader {...props} width={width} height={height} />
             )}
@@ -75,6 +201,7 @@ const InspectionListing = () => {
             ListEmptyComponent={props => (
               <RenderEmptyList {...props} width={width} height={height} />
             )}
+            contentContainerStyle={{paddingBottom: 85}}
           />
         </ScrollView>
       </Box>

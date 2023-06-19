@@ -1,33 +1,35 @@
 import React from 'react';
 import {TouchableOpacity, useWindowDimensions} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Box, Text} from '@components';
 import {ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import styles from './styles';
 
 const Choice = ({
-  variant,
-  bordered,
   title,
+  variant,
+  rounded,
+  bordered,
   isChecked,
-  setCheckboxValue,
   textStyle,
+  setCheckboxValue,
 }) => {
   const {width, height} = useWindowDimensions();
 
   if (variant === 'checkbox') {
     let style = {
-      borderRadius: bordered ? 0 : ms(4, width),
-      backgroundColor: !bordered
+      borderRadius: rounded || isChecked ? ms(1, width) : 0,
+      backgroundColor: rounded
         ? 'rgba(28, 55, 90, 0.16)'
-        : bordered && !isChecked
+        : !isChecked
         ? theme.colors.white
         : theme.colors.checkBoxBorderFill,
-      borderWidth: bordered ? 1 : 0,
-      borderColor: !bordered
+      borderWidth: rounded ? 0 : 1,
+      borderColor: rounded
         ? 'none'
-        : bordered && !isChecked
+        : !isChecked
         ? theme.colors.checkBoxBorder
         : theme.colors.checkBoxBorderFill,
     };
@@ -39,8 +41,8 @@ const Choice = ({
           {isChecked && (
             <Entypo
               name="check"
-              size={ms(13, width)}
-              color={bordered ? theme.colors.white : theme.colors.bottomText}
+              size={ms(11, width)}
+              color={!rounded ? theme.colors.white : theme.colors.bottomText}
             />
           )}
         </TouchableOpacity>
@@ -62,10 +64,12 @@ const Choice = ({
     };
     return (
       <Box style={styles.container(width, height)}>
-        <TouchableOpacity
-          style={styles.buttonStyle(width, height, style)}
-          onPress={setCheckboxValue}>
-          {isChecked && <Box style={styles.radioButton(width, height)} />}
+        <TouchableOpacity onPress={setCheckboxValue}>
+          {isChecked ? (
+            <Fontisto name={'radio-btn-active'} size={20} />
+          ) : (
+            <Fontisto name={'radio-btn-passive'} size={20} />
+          )}
         </TouchableOpacity>
         {title && (
           <TouchableOpacity onPress={setCheckboxValue}>

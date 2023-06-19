@@ -6,23 +6,36 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Box, Text} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
-const EyeIcon = ({showPassword, setShowPassword}) => {
+const InputIcon = ({icon, showPassword, setShowPassword}) => {
   const {width, height} = useWindowDimensions();
+  let bgColor =
+    icon === 'search' ? theme.colors.white : theme.colors.inputBackground;
   return (
     <TouchableOpacity
-      style={styles.icon(width, height)}
+      style={styles.icon(width, height, bgColor)}
       onPress={setShowPassword}>
-      <SimpleLineIcons
-        name="eye"
-        size={ms(20, width)}
-        fontColor={
-          showPassword ? theme.colors.primaryButton : theme.colors.eyeIcon
-        }
-      />
+      {icon === 'password' ? (
+        <SimpleLineIcons
+          name="eye"
+          size={ms(20, width)}
+          color={
+            showPassword ? theme.colors.primaryButton : theme.colors.eyeIcon
+          }
+        />
+      ) : icon === 'search' ? (
+        <AntDesign
+          name="search1"
+          size={ms(20, width)}
+          color={theme.colors.dropdownSelectedText}
+        />
+      ) : (
+        <></>
+      )}
     </TouchableOpacity>
   );
 };
@@ -57,7 +70,8 @@ const Input = props => {
           style={styles.textInput(width, height, style)}
         />
         {icon && (
-          <EyeIcon
+          <InputIcon
+            icon={icon}
             showPassword={showPassword}
             setShowPassword={setShowPassword}
           />
@@ -92,19 +106,21 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: ms(3, w),
     minHeight: vs(45, h),
-    maxHeight: vs(80, h),
+    maxHeight: vs(47, h),
     paddingVertical: vs(14, h),
     paddingHorizontal: s(12, w),
+    borderWidth: 1,
+    borderColor: theme.colors.dropdownBorder,
     ...style,
   }),
-  icon: (w, h) => ({
+  icon: (w, h, bg) => ({
     width: ms(40, w),
     height: '80%',
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    backgroundColor: theme.colors.inputBackground,
+    backgroundColor: bg,
     right: s(4, w),
     borderRadius: ms(4),
   }),

@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.latoRegular,
   }),
   bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(20, w)}),
+  dropdownContainer: width => ({
+    width,
+  }),
 });
 
 export default styles;

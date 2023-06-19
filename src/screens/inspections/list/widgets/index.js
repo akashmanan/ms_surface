@@ -81,7 +81,6 @@ const RenderList = ({
     <Box style={styles.listContainer(width, height)}>
       <Box style={styles.listCategoryContainer(width, height, '13%')}>
         <Choice
-          bordered
           variant={'checkbox'}
           isChecked={state.isChecked}
           setCheckboxValue={() => setCheckboxValue(id)}

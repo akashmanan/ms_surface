@@ -13,10 +13,16 @@ const login = async (username, password, dispatch) => {
       `${Config.USER_LOGIN}`,
       JSON.stringify({
         user: {
-          email: username,
-          password: password,
+          email: 'jessica.blushbit+fkhtech@gmail.com',
+          password: 'Reset@123',
         },
       }),
+      // JSON.stringify({
+      //   user: {
+      //     email: username,
+      //     password: password,
+      //   },
+      // }),
     )
     .then(async res => {
       if (res?.status === 200) {
