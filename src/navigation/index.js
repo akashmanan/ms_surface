@@ -5,6 +5,8 @@ import {
   InspectionListing,
   CreateInspection,
   InspectionDetails,
+  CreateQuote,
+  RenovationSetup,
 } from '@screens';
 import {useSelector} from 'react-redux';
 
@@ -13,7 +15,9 @@ const Stack = createStackNavigator();
 const Navigation = () => {
   const {accessToken} = useSelector(state => state.authReducer);
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="InspectionDetails">
       {!accessToken ? (
         <Stack.Screen name="Login" component={Login} />
       ) : (
@@ -27,6 +31,8 @@ const Navigation = () => {
             name="InspectionDetails"
             component={InspectionDetails}
           />
+          <Stack.Screen name="CreateQuote" component={CreateQuote} />
+          <Stack.Screen name="RenovationSetup" component={RenovationSetup} />
         </Stack.Group>
       )}
     </Stack.Navigator>

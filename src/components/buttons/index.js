@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Children} from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -115,7 +115,15 @@ const Buttons = ({
   }
 };
 
-export {Buttons};
+const Button = ({onPress, style, children}) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={style}>
+      {children}
+    </TouchableOpacity>
+  );
+};
+
+export {Buttons, Button};
 
 const styles = StyleSheet.create({
   baseStyle: (w, h) => ({

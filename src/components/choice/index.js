@@ -66,9 +66,17 @@ const Choice = ({
       <Box style={styles.container(width, height)}>
         <TouchableOpacity onPress={setCheckboxValue}>
           {isChecked ? (
-            <Fontisto name={'radio-btn-active'} size={20} />
+            <Fontisto
+              name={'radio-btn-active'}
+              size={ms(18, width)}
+              color={theme.colors.bottomText}
+            />
           ) : (
-            <Fontisto name={'radio-btn-passive'} size={20} />
+            <Fontisto
+              name={'radio-btn-passive'}
+              size={ms(18, width)}
+              color={theme.colors.bottomText}
+            />
           )}
         </TouchableOpacity>
         {title && (

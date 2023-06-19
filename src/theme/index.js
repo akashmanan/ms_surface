@@ -8,6 +8,10 @@ const fonts = Platform.select({
     openSansBold: 'OpenSans-Bold.ttf',
     latoRegular: 'Lato-Regular.ttf',
     latoBold: 'Lato-Bold.ttf',
+    interRegular: 'Assets/Inter-Regular.ttf',
+    interMedium: 'Assets/Inter-Medium.ttf',
+    interSemiBold: 'Assets/Inter-SemiBold.ttf',
+    interBold: 'Assets/Inter-Bold.ttf',
   },
   android: {
     openSansRegular: 'OpenSans-Regular.ttf',
@@ -16,6 +20,10 @@ const fonts = Platform.select({
     openSansBold: 'OpenSans-Bold.ttf',
     latoRegular: 'Lato-Regular.ttf',
     latoBold: 'Lato-Bold.ttf',
+    interRegular: 'Assets/Inter-Regular.ttf',
+    interMedium: 'Assets/Inter-Medium.ttf',
+    interSemiBold: 'Assets/Inter-SemiBold.ttf',
+    interBold: 'Assets/Inter-Bold.ttf',
   },
   windows: {
     openSansRegular: 'Assets/OpenSans-Regular.ttf#Open Sans',
@@ -24,6 +32,10 @@ const fonts = Platform.select({
     openSansBold: 'Assets/OpenSans-Bold.ttf#Open Sans',
     latoRegular: 'Assets/Lato-Regular.ttf#Lato',
     latoBold: 'Assets/Lato-Bold.ttf#Lato',
+    interRegular: 'Assets/Inter-Regular.ttf#Inter',
+    interMedium: 'Assets/Inter-Medium.ttf#Inter',
+    interSemiBold: 'Assets/Inter-SemiBold.ttf#Inter',
+    interBold: 'Assets/Inter-Bold.ttf#Inter',
   },
 });
 const colors = {
@@ -71,6 +83,11 @@ const colors = {
   tabBg: 'rgba(233, 236, 240, 0.34)',
   defaultStatusBg: '#D3D3D3',
   tabBarItem: '#848484',
+  profileName: '#29293E',
+  comment: '#595959',
+  searchButton: 'rgba(217, 236, 255, 0.49003)',
+  separator: '#E9E9E9',
+  sideBarBg: '#FDFDFD',
 };
 
 const theme = {

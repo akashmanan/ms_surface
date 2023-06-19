@@ -1,15 +1,31 @@
 import React from 'react';
-import {Image as ImageComponent, StyleSheet} from 'react-native';
+import {
+  Image as ImageComponent,
+  ImageBackground,
+  StyleSheet,
+} from 'react-native';
 
-const Image = ({path, type, style, resizeMode, canGoBack}) => {
+const Image = ({variant, children, path, type, style, resizeMode}) => {
   let newPath = type === 'offline' ? path : {uri: path};
-  return (
-    <ImageComponent
-      source={newPath}
-      style={[styles.imgStyle, style]}
-      resizeMode={resizeMode}
-    />
-  );
+
+  if (variant === 'background') {
+    return (
+      <ImageBackground
+        source={newPath}
+        style={[styles.imgStyle, style]}
+        resizeMode={resizeMode}>
+        {children}
+      </ImageBackground>
+    );
+  } else {
+    return (
+      <ImageComponent
+        source={newPath}
+        style={[styles.imgStyle, style]}
+        resizeMode={resizeMode}
+      />
+    );
+  }
 };
 
 export {Image};

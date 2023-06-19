@@ -35,6 +35,7 @@ const InspectionDetailsHeader = () => {
             <Text
               fontColor={statusStyle.color}
               textAlign={'center'}
+              fontSize={12}
               style={styles.statusText(width)}>
               {'In progress'}
             </Text>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   status: (w, h, bg) => ({
     width: '64%',
     height: vs(25, h),
-    borderRadius: 16,
+    borderRadius: ms(16, w),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: bg,
