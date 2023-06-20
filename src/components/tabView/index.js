@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, useWindowDimensions} from 'react-native';
 import {Box, Text, Button} from '@components';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {s, vs} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
 const RenderTabItem = ({
@@ -17,7 +17,7 @@ const RenderTabItem = ({
     borderBottomWidth: activeTab === index ? s(3, width) : 0,
   };
   return (
-    <Button onPress={() => handleTabPress(index)}>
+    <Button onPress={() => handleTabPress(index, title)}>
       <Box style={styles.tabItem(width, height, style)}>
         <Text fontSize={18} fontColor={theme.colors.primaryButton}>
           {title}
@@ -37,7 +37,9 @@ const TabView = ({data, handleTabPress, activeTab, style}) => {
           index={index}
           title={title}
           activeTab={activeTab}
-          handleTabPress={data => handleTabPress(data)}
+          handleTabPress={(tabIndex, tabName) =>
+            handleTabPress(tabIndex, tabName)
+          }
           width={width}
           height={height}
         />

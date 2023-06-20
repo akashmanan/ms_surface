@@ -40,7 +40,7 @@ const RenderDropdownOption = ({
       onPress={() => onPressListItem(title)}
       style={styles.iconContainer(width, height)}>
       {checkbox && (
-        <Box style={{width: '10%'}}>
+        <Box style={styles.choiceContainer}>
           <Choice
             variant={'checkbox'}
             isChecked={selectedData?.includes(title)}
@@ -48,7 +48,7 @@ const RenderDropdownOption = ({
           />
         </Box>
       )}
-      <Box style={{width: '80%', ...statusContainerStyle}}>
+      <Box style={styles.textContainer(statusContainerStyle)}>
         <Text
           numberOfLines={2}
           fontSize={12}
@@ -220,4 +220,9 @@ const styles = StyleSheet.create({
   inputStyle: {
     borderColor: theme.colors.dropdownBorder,
   },
+  choiceContainer: {width: '10%'},
+  textContainer: style => ({
+    width: '80%',
+    ...style,
+  }),
 });

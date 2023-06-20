@@ -15,9 +15,7 @@ const Stack = createStackNavigator();
 const Navigation = () => {
   const {accessToken} = useSelector(state => state.authReducer);
   return (
-    <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      initialRouteName="InspectionDetails">
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {!accessToken ? (
         <Stack.Screen name="Login" component={Login} />
       ) : (

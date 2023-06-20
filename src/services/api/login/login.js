@@ -4,7 +4,6 @@ import storage from '@thirdParty/storage';
 import {setUserLogin, setLoader, setErrorMsg} from '@redux/slice/authSlice';
 import Config from '@services/api/apiURLs';
 import {inspectionListing} from '@services/api';
-import SetCookies from '@thirdParty/cookies';
 
 const login = async (username, password, dispatch) => {
   dispatch(setLoader(true));
@@ -13,16 +12,10 @@ const login = async (username, password, dispatch) => {
       `${Config.USER_LOGIN}`,
       JSON.stringify({
         user: {
-          email: 'jessica.blushbit+fkhtech@gmail.com',
-          password: 'Reset@123',
+          email: username,
+          password: password,
         },
       }),
-      // JSON.stringify({
-      //   user: {
-      //     email: username,
-      //     password: password,
-      //   },
-      // }),
     )
     .then(async res => {
       if (res?.status === 200) {

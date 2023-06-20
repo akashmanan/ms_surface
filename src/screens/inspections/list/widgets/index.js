@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {Box, Buttons, Choice, Text} from '@components';
+import {Box, NativeButton, Choice, Text} from '@components';
 import {theme} from '@theme';
 import styles from '../styles';
 
 const HeaderTitle = ({title, dimensions: {width, height}, style}) => {
   return (
     <Box style={style}>
-      <Buttons
+      <NativeButton
         title={title}
         buttonStyle={styles.headerTitleButton}
         buttonTextStyle={styles.headerTitleText(width, height)}
@@ -126,3 +126,4 @@ const RenderEmptyList = ({width, height}) => {
 };
 
 export {RenderListHeader, RenderList, RenderEmptyList};
+export {status, propertyData, customerData} from './mock';

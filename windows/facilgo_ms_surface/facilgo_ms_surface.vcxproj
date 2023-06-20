@@ -172,9 +172,12 @@
     <Font Include="Assets\FontAwesome5_Solid.ttf" />
     <Font Include="Assets\Fontisto.ttf" />
     <Font Include="Assets\Foundation.ttf" />
+    <Font Include="Assets\Inter-Bold.ttf" />
+    <Font Include="Assets\Inter-Medium.ttf" />
+    <Font Include="Assets\Inter-Regular.ttf" />
+    <Font Include="Assets\Inter-SemiBold.ttf" />
     <Font Include="Assets\Ionicons.ttf" />
-    <Font Include="Assets\Lato-Bold.ttf" />
-    <Font Include="Assets\Lato-Regular.ttf" />
+    <Font Include="Assets\Lato-Italic.ttf" />
     <Font Include="Assets\MaterialCommunityIcons.ttf" />
     <Font Include="Assets\MaterialIcons.ttf" />
     <Font Include="Assets\Octicons.ttf" />

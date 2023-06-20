@@ -4,7 +4,7 @@ import {TopTabBar} from '@components';
 
 const RenovationSetup = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <TopTabBar />
       <Text>RenovationSetup</Text>
     </View>
@@ -13,4 +13,8 @@ const RenovationSetup = () => {
 
 export {RenovationSetup};
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

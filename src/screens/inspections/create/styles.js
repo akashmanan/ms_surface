@@ -69,6 +69,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
   }),
+  dropdownContainer: (w, h) => ({
+    width: Platform.OS === 'windows' ? '44%' : '100%',
+    zIndex: 1,
+  }),
+  dropDown: (w, h) => ({
+    width: Platform.OS === 'windows' ? '44%' : '100%',
+    zIndex: -15,
+  }),
 });
 
 export default styles;

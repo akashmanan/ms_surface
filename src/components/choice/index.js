@@ -14,6 +14,8 @@ const Choice = ({
   bordered,
   isChecked,
   textStyle,
+  defaultColor,
+  selectedColor,
   setCheckboxValue,
 }) => {
   const {width, height} = useWindowDimensions();
@@ -56,12 +58,6 @@ const Choice = ({
       </Box>
     );
   } else if (variant === 'radio') {
-    let style = {
-      borderRadius: ms(100),
-      borderWidth: 1,
-      borderColor: theme.colors.bottomText,
-      padding: ms(10, width),
-    };
     return (
       <Box style={styles.container(width, height)}>
         <TouchableOpacity onPress={setCheckboxValue}>
@@ -69,13 +65,13 @@ const Choice = ({
             <Fontisto
               name={'radio-btn-active'}
               size={ms(18, width)}
-              color={theme.colors.bottomText}
+              color={selectedColor ? selectedColor : theme.colors.bottomText}
             />
           ) : (
             <Fontisto
               name={'radio-btn-passive'}
               size={ms(18, width)}
-              color={theme.colors.bottomText}
+              color={defaultColor ? defaultColor : theme.colors.bottomText}
             />
           )}
         </TouchableOpacity>

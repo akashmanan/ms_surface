@@ -2,45 +2,26 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, useWindowDimensions, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {inspectionListing} from '@services/api';
 import {
   Box,
   Heading,
   BottomBar,
-  Buttons,
+  NativeButton,
   Dropdown,
   Input,
   TopTabBar,
 } from '@components';
 import {theme} from '@theme';
-import {RenderListHeader, RenderList, RenderEmptyList} from './widgets';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {inspectionListing} from '@services/api';
+import {
+  RenderListHeader,
+  RenderList,
+  RenderEmptyList,
+  status,
+  propertyData,
+  customerData,
+} from './widgets';
 import styles from './styles';
-
-const status = [
-  {title: 'In progress'},
-  {title: 'Completed'},
-  {title: 'Cancelled'},
-];
-
-const propertyData = [
-  {title: '0N611 Gray Ave Wheaton, IL 60187'},
-  {title: '1 Berry Ct Lake SaintLouis, MO 63367'},
-  {title: '1 Sweetwater Pkwy Powder Springs, GA 30127'},
-  {title: '10 Gentry Drive Cartersville, GA 30120'},
-  {title: '10 Lloyd St Cary, IL 60013'},
-];
-
-const customerData = [
-  {title: 'AMLI'},
-  {title: 'Ziegler'},
-  {title: 'Kairos Living'},
-  {title: 'Avenue Living'},
-  {title: 'Davlyn'},
-  {title: 'FirstKey Homes'},
-  {title: 'Edward Rose'},
-  {title: 'Williams MGMT'},
-];
 
 const InspectionListing = () => {
   const {width, height} = useWindowDimensions();
@@ -102,7 +83,7 @@ const InspectionListing = () => {
         [item]: [...state[item], selectedValue],
       }));
     } else {
-      filteredData = state[item]?.filter(item => item !== selectedValue);
+      filteredData = state[item]?.filter(value => value !== selectedValue);
       setState(prev => ({
         ...prev,
         [item]: filteredData,
@@ -137,7 +118,7 @@ const InspectionListing = () => {
           buttonTitle={'Create Inspection'}
           onPress={onCreateInspection}
         />
-        <Box style={{flexDirection: 'row', columnGap: s(12, width)}}>
+        <Box style={styles.input(width, height)}>
           <Input
             icon={'search'}
             onChangeText={onSearchInspection}
@@ -201,12 +182,12 @@ const InspectionListing = () => {
             ListEmptyComponent={props => (
               <RenderEmptyList {...props} width={width} height={height} />
             )}
-            contentContainerStyle={{paddingBottom: 85}}
+            contentContainerStyle={styles.contentContainerStyle(width, height)}
           />
         </ScrollView>
       </Box>
       <BottomBar style={styles.bottomBar(width, height)}>
-        <Buttons
+        <NativeButton
           title={'Copy Inspection'}
           variant={'outline'}
           onPress={() => {}}
@@ -214,7 +195,7 @@ const InspectionListing = () => {
           buttonStyle={styles.button(width, height)}
           buttonTextStyle={styles.buttonText(width, height)}
         />
-        <Buttons
+        <NativeButton
           title={'Create Quote'}
           variant={'primary'}
           onPress={() => {}}

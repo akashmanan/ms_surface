@@ -8,6 +8,7 @@ const fonts = Platform.select({
     openSansBold: 'OpenSans-Bold.ttf',
     latoRegular: 'Lato-Regular.ttf',
     latoBold: 'Lato-Bold.ttf',
+    latoItalic: 'Assets/Lato-Italic.ttf',
     interRegular: 'Assets/Inter-Regular.ttf',
     interMedium: 'Assets/Inter-Medium.ttf',
     interSemiBold: 'Assets/Inter-SemiBold.ttf',
@@ -20,6 +21,7 @@ const fonts = Platform.select({
     openSansBold: 'OpenSans-Bold.ttf',
     latoRegular: 'Lato-Regular.ttf',
     latoBold: 'Lato-Bold.ttf',
+    latoItalic: 'Assets/Lato-Italic.ttf',
     interRegular: 'Assets/Inter-Regular.ttf',
     interMedium: 'Assets/Inter-Medium.ttf',
     interSemiBold: 'Assets/Inter-SemiBold.ttf',
@@ -32,6 +34,7 @@ const fonts = Platform.select({
     openSansBold: 'Assets/OpenSans-Bold.ttf#Open Sans',
     latoRegular: 'Assets/Lato-Regular.ttf#Lato',
     latoBold: 'Assets/Lato-Bold.ttf#Lato',
+    latoItalic: 'Assets/Lato-Italic.ttf#Lato',
     interRegular: 'Assets/Inter-Regular.ttf#Inter',
     interMedium: 'Assets/Inter-Medium.ttf#Inter',
     interSemiBold: 'Assets/Inter-SemiBold.ttf#Inter',
@@ -88,6 +91,8 @@ const colors = {
   searchButton: 'rgba(217, 236, 255, 0.49003)',
   separator: '#E9E9E9',
   sideBarBg: '#FDFDFD',
+  sideBarBgColor: '#d8d8d8',
+  lineItemBorder: '#E5E5E5',
 };
 
 const theme = {

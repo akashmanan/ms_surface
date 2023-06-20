@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {s, vs, ms} from '@thirdParty/screenSize';
+import {vs} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
 const commonStyles = StyleSheet.create({

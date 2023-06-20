@@ -4,28 +4,30 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Box, Text, Input, Buttons, Button, Choice} from '@components';
+import {Box, Text, Input, NativeButton, Button, Choice} from '@components';
 import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
-const InspectionItem = ({onPressSearch}) => {
+const LineItem = ({
+  title,
+  comment,
+  measurement,
+  onPressSearch,
+  onPressCamera,
+}) => {
   const {width, height} = useWindowDimensions();
   const [status, setStatus] = useState();
 
-  const setDefaultStatus = status => {
-    setStatus(status);
+  const setDefaultStatus = choice => {
+    setStatus(choice);
   };
 
   return (
     <Box style={styles.contaienr(width, height)}>
-      <Box
-        style={[
-          styles.subContainer(width, height),
-          {justifyContent: 'space-between'},
-        ]}>
+      <Box style={styles.statusContainerStyle}>
         <Box style={styles.titleContainer(width, height)}>
           <Text fontSize={20} fontFamily={theme.fonts.latoBold}>
-            AIR GAP REPLACEMENT CAP BRUSHED NICKEL
+            {title}
           </Text>
           <Octicons
             name={'pencil'}
@@ -36,16 +38,18 @@ const InspectionItem = ({onPressSearch}) => {
         <Box style={styles.choiceContainer(width, height)}>
           <Choice
             bordered
-            variant={'radio'}
             title={'Yes'}
+            variant={'radio'}
             isChecked={status === 'Yes' ? true : false}
+            selectedColor={theme.colors.checkBoxBorderFill}
             setCheckboxValue={() => setDefaultStatus('Yes')}
           />
           <Choice
             bordered
-            variant={'radio'}
             title={'No'}
+            variant={'radio'}
             isChecked={status === 'No' ? true : false}
+            selectedColor={theme.colors.checkBoxBorderFill}
             setCheckboxValue={() => setDefaultStatus('No')}
           />
         </Box>
@@ -57,16 +61,17 @@ const InspectionItem = ({onPressSearch}) => {
           size={ms(22, width)}
         />
         <Text fontSize={18} fontColor={theme.colors.comment}>
-          Bronze Colour
+          {comment}
         </Text>
       </Box>
-      <Box style={[styles.subContainer(width, height)]}>
+      <Box style={styles.subContainer(width, height)}>
         <MaterialCommunityIcons
-          name="message-processing-outline"
+          name="ruler-square"
           color={theme.colors.tabBarItem}
           size={ms(22, width)}
+          style={{transform: [{rotate: '-90deg'}]}}
         />
-        <Input style={styles.input(width, height)} />
+        <Input style={styles.input(width, height)} defaultValue={measurement} />
         <Button>
           <Text fontColor={theme.colors.primaryButton}>Measure</Text>
         </Button>
@@ -79,12 +84,11 @@ const InspectionItem = ({onPressSearch}) => {
         </Button>
       </Box>
       <Box
-        style={[
-          styles.subContainer(width, height),
-          {justifyContent: 'space-between'},
-        ]}>
+        style={styles.subContainer(width, height, {
+          justifyContent: 'space-between',
+        })}>
         <Box style={styles.titleContainer(width, height)}>
-          <Buttons
+          <NativeButton
             variant={'cancel'}
             title={'Search'}
             buttonStyle={styles.buttonStyle(width, height)}
@@ -100,7 +104,7 @@ const InspectionItem = ({onPressSearch}) => {
           </Button>
         </Box>
         <Box style={styles.titleContainer(width, height)}>
-          <Button onPress={() => {}}>
+          <Button onPress={onPressCamera}>
             <Feather
               name="camera"
               color={theme.colors.dropdownSelectedText}
@@ -120,7 +124,7 @@ const InspectionItem = ({onPressSearch}) => {
   );
 };
 
-export {InspectionItem};
+export {LineItem};
 
 const styles = StyleSheet.create({
   contaienr: (w, h) => ({
@@ -131,11 +135,12 @@ const styles = StyleSheet.create({
     paddingBottom: vs(23, h),
     paddingTop: vs(26, h),
   }),
-  subContainer: (w, h) => ({
+  subContainer: (w, h, style) => ({
     flexDirection: 'row',
     alignItems: 'center',
     columnGap: s(14, w),
     rowGap: vs(40, h),
+    ...style,
   }),
   buttonStyle: (w, h) => ({
     width: s(100, w),
@@ -153,4 +158,5 @@ const styles = StyleSheet.create({
     columnGap: s(10, w),
   }),
   input: (w, h) => ({width: s(294, w), height: vs(40, h)}),
+  statusContainerStyle: {flexDirection: 'row', justifyContent: 'space-between'},
 });

@@ -80,7 +80,7 @@ const Input = props => {
       {bottomText && (
         <Text
           fontSize={12}
-          fontFamily={theme.fonts.openSansRegular}
+          fontFamily={theme.fonts.latoItalic}
           fontColor={
             isError ? theme.colors.bottomTextError : theme.colors.bottomText
           }

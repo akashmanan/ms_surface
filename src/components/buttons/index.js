@@ -1,4 +1,4 @@
-import React, {Children} from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -10,7 +10,7 @@ import {Box, Loader, Text} from '@components';
 import {ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 
-const Buttons = ({
+const NativeButton = ({
   title,
   onPress,
   variant,
@@ -115,15 +115,12 @@ const Buttons = ({
   }
 };
 
-const Button = ({onPress, style, children}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={style}>
-      {children}
-    </TouchableOpacity>
-  );
+const Button = props => {
+  let {children} = props;
+  return <TouchableOpacity {...props}>{children}</TouchableOpacity>;
 };
 
-export {Buttons, Button};
+export {NativeButton, Button};
 
 const styles = StyleSheet.create({
   baseStyle: (w, h) => ({

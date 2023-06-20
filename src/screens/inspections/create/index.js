@@ -5,27 +5,28 @@ import {
   TouchableOpacity,
   useWindowDimensions,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {check, PERMISSIONS} from 'react-native-permissions';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   Box,
   Input,
   Image,
-  Buttons,
-  Choice,
-  Dropdown,
-  BottomBar,
-  Heading,
   Modal,
   Camera,
+  Choice,
+  Heading,
+  Dropdown,
+  BottomBar,
+  TopTabBar,
+  NativeButton,
 } from '@components';
 import {vs} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import {floorplanData, propertyData} from './widgets';
 import styles from './styles';
-import {check, PERMISSIONS} from 'react-native-permissions';
 import commonStyles from '../commonStyles';
-import {useNavigation} from '@react-navigation/native';
 
 const CreateInspection = () => {
   const {width, height} = useWindowDimensions();
@@ -33,6 +34,7 @@ const CreateInspection = () => {
   const [state, setState] = useState({
     image: [],
     type: null,
+    popup: false,
     isChecked: false,
     selectedRadio: '',
     isKeyboardOpened: false,
@@ -113,6 +115,7 @@ const CreateInspection = () => {
 
   return (
     <>
+      <TopTabBar />
       <Modal isVisible={state.popup} onClose={onCloseCamera}>
         {state.popup && (
           <Camera
@@ -143,7 +146,7 @@ const CreateInspection = () => {
             defaultText={state.defaultTextProperty}
             expanded={state.expandedProperty}
             setExpandValue={setExpandPropertyValue}
-            style={styles.inputContainer(width, height)}
+            style={styles.dropdownContainer(width, height)}
             onPressListItem={onPressProperty}
             bottomText={"Didn't find what you were looking for?"}
           />
@@ -156,7 +159,11 @@ const CreateInspection = () => {
             expanded={state.expandedFloorplan}
             setExpandValue={setExpandFloorplanValue}
             onPressListItem={onPressFloorplan}
-            style={styles.inputContainer(width, height)}
+            style={
+              state.expandedProperty
+                ? styles.dropDown(width, height)
+                : styles.dropdownContainer(width, height)
+            }
           />
           <Input
             inputTitle={'Floorplan Unit Count'}
@@ -238,14 +245,14 @@ const CreateInspection = () => {
       </ScrollView>
       {!state.isKeyboardOpened && (
         <BottomBar style={styles.bottomBar}>
-          <Buttons
+          <NativeButton
             title={'Cancel'}
             variant={'cancel'}
             onPress={() => {}}
             buttonStyle={styles.button(width, height)}
             buttonTextStyle={styles.buttonText(width, height)}
           />
-          <Buttons
+          <NativeButton
             title={'Create'}
             variant={'primary'}
             onPress={() => {

@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import {Platform, useWindowDimensions} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {Buttons, Image, Input, Choice, Box, Text} from '@components';
+import {NativeButton, Image, Input, Choice, Box, Text} from '@components';
 import {login} from '@services/api';
-import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
 import styles from './styles';
 
@@ -120,7 +118,7 @@ const Login = () => {
                 )}
               />
             </Box>
-            <Buttons
+            <NativeButton
               title={'Forgot Password?'}
               onPress={() => {}}
               buttonTextStyle={styles.bottomButtonText(
@@ -131,7 +129,7 @@ const Login = () => {
               )}
             />
           </Box>
-          <Buttons
+          <NativeButton
             variant={'primary'}
             buttonStyle={styles.buttonStyle(width, height)}
             textStyle={styles.textStyle(width, height)}

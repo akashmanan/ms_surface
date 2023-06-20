@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
   dropdownContainer: width => ({
     width,
   }),
+  input: (w, h) => ({flexDirection: 'row', columnGap: s(12, w)}),
+  contentContainerStyle: (w, h) => ({paddingBottom: vs(85, h)}),
 });
 
 export default styles;

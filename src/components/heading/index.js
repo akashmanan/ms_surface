@@ -1,6 +1,6 @@
 import React from 'react';
 import {useWindowDimensions} from 'react-native';
-import {Box, Buttons, HeadingText} from '@components';
+import {Box, NativeButton, HeadingText} from '@components';
 import {theme} from '@theme';
 import styles from './styles';
 
@@ -14,7 +14,7 @@ const Heading = ({heading, buttonTitle, onPress}) => {
         {heading}
       </HeadingText>
       {buttonTitle && onPress && (
-        <Buttons
+        <NativeButton
           variant={'primary'}
           title={buttonTitle}
           buttonStyle={styles.buttonStyle(width, height)}

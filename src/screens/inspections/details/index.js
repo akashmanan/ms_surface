@@ -1,78 +1,92 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, useWindowDimensions} from 'react-native';
+import {ScrollView, useWindowDimensions} from 'react-native';
+import {check, PERMISSIONS} from 'react-native-permissions';
 import {
   Box,
   Text,
+  Modal,
   Choice,
-  Buttons,
-  SideBar,
+  Camera,
   TabView,
+  LineItem,
+  TopTabBar,
   BottomBar,
-  InspectionItem,
+  NativeButton,
 } from '@components';
-import {s, vs, ms} from '@thirdParty/screenSize';
 import {theme} from '@theme';
-import InspectionDetailsHeader from './widgets/header';
+import {
+  InspectionDetailsHeader,
+  tabData,
+  lineItems,
+  RenderSearchTabBar,
+} from './widgets';
 import commonStyles from '../commonStyles';
-
-const tabData = [
-  {index: 0, title: 'Electrical'},
-  {index: 1, title: 'Doors'},
-  {index: 2, title: 'Blinds'},
-  {index: 3, title: 'Plumbing'},
-  {index: 4, title: 'Appliances'},
-];
+import styles from './styles';
 
 const InspectionDetails = () => {
   const {width, height} = useWindowDimensions();
   const [state, setState] = useState({
     defaultStatus: '',
     activeTabIndex: 0,
+    activeTabName: 'Electrical',
     showSideBar: false,
+    image: [],
   });
+
+  const openCamera = async () => {
+    setState(prev => ({...prev, popup: true}));
+  };
+
+  const onCloseCamera = () => {
+    setState(prev => ({...prev, popup: false}));
+  };
 
   const setDefaultStatus = status => {
     setState(prev => ({...prev, defaultStatus: status}));
   };
 
-  const handleTabPress = tabIndex => {
-    setState(prev => ({...prev, activeTabIndex: tabIndex}));
+  const handleTabPress = (tabIndex, tabName) => {
+    setState(prev => ({
+      ...prev,
+      activeTabIndex: tabIndex,
+      activeTabName: tabName,
+    }));
   };
 
   const handleSideBar = () => {
-    setState(prev => ({...prev, showSideBar: !state.sidebarItems}));
+    setState(prev => ({...prev, showSideBar: !state.lineItems}));
   };
 
   const onPressClose = () => {
     setState(prev => ({...prev, showSideBar: false}));
   };
 
-  const sidebarItems = [
-    {
-      title: `WHIRPOOL OEM ICEMAKER
-REPLACES ECKMFEZ2`,
-      sku: '#4903084',
-      type: 'EA',
-      price: '$104.99',
-    },
-    {
-      title: `WHIRPOOL OEM ICEMAKER
-REPLACES ECKMFEZ2`,
-      sku: '#4903083',
-      type: 'EA',
-      price: '$104.99',
-    },
-    {
-      title: `WHIRPOOL OEM ICEMAKER
-REPLACES ECKMFEZ2`,
-      sku: '#3785960',
-      type: 'EA',
-      price: '$87.39',
-    },
-  ];
+  const takePicture = async camera => {
+    check(PERMISSIONS.WINDOWS.WEBCAM)
+      .then(async result => {
+        if (camera.current) {
+          const options = {quality: 0.5, base64: true};
+          const data = await camera.current.takePictureAsync(options);
+          setState(prev => ({...prev, image: [...state.image, data.uri]}));
+        }
+      })
+      .catch(error => console.log(error));
+  };
 
   return (
     <>
+      <TopTabBar />
+      <Modal isVisible={state.popup} onClose={onCloseCamera}>
+        {state.popup && (
+          <Camera
+            takePicture={cameraRef => {
+              takePicture(cameraRef);
+            }}
+            style={styles.camera(width, height)}
+            onCloseCamera={onCloseCamera}
+          />
+        )}
+      </Modal>
       <ScrollView
         style={commonStyles.container(width, height)}
         contentContainerStyle={styles.container}>
@@ -81,38 +95,48 @@ REPLACES ECKMFEZ2`,
           style={styles.tabView(width, height)}
           data={tabData}
           activeTab={state.activeTabIndex}
-          handleTabPress={data => handleTabPress(data)}
+          handleTabPress={(index, name) => handleTabPress(index, name)}
         />
         <Box style={styles.tabHeader(width, height)}>
-          <Text fontColor={theme.colors.buttonBorder}>Plumbing</Text>
+          <Text fontColor={theme.colors.buttonBorder}>
+            {state?.activeTabName}
+          </Text>
           <Box style={styles.statusContainer(width, height)}>
             <Text fontColor={theme.colors.cancelButtonText} fontSize={18}>
               Set Default Status
             </Text>
             <Choice
               bordered
-              variant={'radio'}
               title={'Yes'}
-              isChecked={state.defaultStatus === 'Yes' ? true : false}
+              variant={'radio'}
+              selectedColor={theme.colors.checkBoxBorderFill}
               setCheckboxValue={() => setDefaultStatus('Yes')}
+              isChecked={state.defaultStatus === 'Yes' ? true : false}
             />
             <Choice
               bordered
-              variant={'radio'}
               title={'No'}
-              isChecked={state.defaultStatus === 'No' ? true : false}
+              variant={'radio'}
+              selectedColor={theme.colors.checkBoxBorderFill}
               setCheckboxValue={() => setDefaultStatus('No')}
+              isChecked={state.defaultStatus === 'No' ? true : false}
             />
           </Box>
         </Box>
-
-        <InspectionItem onPressSearch={handleSideBar} />
-        <InspectionItem onPressSearch={handleSideBar} />
-        <InspectionItem onPressSearch={handleSideBar} />
+        {tabData?.[state.activeTabIndex]?.data?.map(
+          ({title, comment, measurement}) => (
+            <LineItem
+              title={title}
+              comment={comment}
+              measurement={measurement}
+              onPressCamera={openCamera}
+              onPressSearch={handleSideBar}
+            />
+          ),
+        )}
       </ScrollView>
-
       <BottomBar style={styles.bottomBar(width, height)}>
-        <Buttons
+        <NativeButton
           title={'Complete'}
           variant={'primary'}
           onPress={() => {}}
@@ -122,12 +146,11 @@ REPLACES ECKMFEZ2`,
         />
       </BottomBar>
       {state.showSideBar ? (
-        <SideBar
+        <RenderSearchTabBar
+          width={width}
+          height={height}
+          lineItems={lineItems}
           onPressClose={onPressClose}
-          items={sidebarItems}
-          onItemSelected={() => {}}
-          title={`Results for`}
-          subTitle={`WHIRPOOL OEM ICEMAKER REPLACES ECKMFEZ2 Silver 2' 11.75'' x 6' 7.5`}
         />
       ) : null}
     </>
@@ -135,37 +158,3 @@ REPLACES ECKMFEZ2`,
 };
 
 export {InspectionDetails};
-
-const styles = StyleSheet.create({
-  container: {paddingHorizontal: '5%'},
-  tabHeader: (w, h) => ({
-    width: '100%',
-    height: vs(80, h),
-    paddingHorizontal: '2%',
-    justifyContent: 'center',
-    marginTop: vs(30, h),
-    backgroundColor: theme.colors.tabBg,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  }),
-  statusContainer: (w, h) => ({
-    height: vs(38, h),
-    paddingHorizontal: s(20, w),
-    borderRadius: ms(4, w),
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: s(10, w),
-    backgroundColor: theme.colors.defaultStatusBg,
-  }),
-  tabView: (w, h) => ({marginTop: vs(40, h), marginLeft: '1%'}),
-  bottomBar: (w, h) => ({justifyContent: 'flex-end', columnGap: s(20, w)}),
-  button: (w, h) => ({
-    width: s(160, w),
-    height: vs(40, h),
-  }),
-  buttonText: (w, h) => ({
-    fontSize: ms(16, w),
-    fontFamily: theme.fonts.latoRegular,
-  }),
-});

@@ -4,7 +4,7 @@ import {TopTabBar} from '@components';
 
 const CreateQuote = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <TopTabBar />
       <Text>CreateQuote</Text>
     </View>
@@ -13,4 +13,8 @@ const CreateQuote = () => {
 
 export {CreateQuote};
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

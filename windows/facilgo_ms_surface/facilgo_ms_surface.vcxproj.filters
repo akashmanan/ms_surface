@@ -120,7 +120,20 @@
     <Font Include="Assets\OpenSans-SemiBold.ttf">
       <Filter>Assets</Filter>
     </Font>
-    <Font Include="Assets\Lato-Bold.ttf" />
-    <Font Include="Assets\Lato-Regular.ttf" />
+    <Font Include="Assets\Inter-Bold.ttf">
+      <Filter>Assets</Filter>
+    </Font>
+    <Font Include="Assets\Inter-Medium.ttf">
+      <Filter>Assets</Filter>
+    </Font>
+    <Font Include="Assets\Inter-Regular.ttf">
+      <Filter>Assets</Filter>
+    </Font>
+    <Font Include="Assets\Inter-SemiBold.ttf">
+      <Filter>Assets</Filter>
+    </Font>
+    <Font Include="Assets\Lato-Italic.ttf">
+      <Filter>Assets</Filter>
+    </Font>
   </ItemGroup>
 </Project>

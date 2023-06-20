@@ -59,7 +59,7 @@ const InspectionDetailsHeader = () => {
   );
 };
 
-export default InspectionDetailsHeader;
+export {InspectionDetailsHeader};
 
 const styles = StyleSheet.create({
   headerContainer: {flexDirection: 'row'},

@@ -45,9 +45,17 @@ const TopTabBar = () => {
     navigation.navigate('RenovationSetup');
     dispatch(setSelectedTab('Renovation Setup'));
   };
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <Box style={styles.container(width, height)}>
       <Box style={styles.subContainers(width, height, '22%')}>
+        <Button onPress={goBack}>
+          <Ionicons name={'chevron-back-circle-outline'} />
+        </Button>
         <Image
           type={'offline'}
           path={require('@assets/images/facilgoIcon.png')}
